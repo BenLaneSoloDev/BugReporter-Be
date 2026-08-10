@@ -1,0 +1,20 @@
+POST http://localhost:3001/
+Content-Type: application/json
+{
+  "data": "default post"
+}
+
+GET http://localhost:3001/
+Content-Type: application/json
+
+PATCH http://localhost:3001/
+Content-Type: application/json
+{
+  "data": "Data Changed"
+}
+
+DELETE http://localhost:3001/
+Content-Type: application/json
+{
+  "_id": "Data deleted"
+}
