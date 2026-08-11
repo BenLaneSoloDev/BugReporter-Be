@@ -1,13 +1,23 @@
 import type { Express, Request, Response } from "express";
 const { StatusCodes } = require("http-status-codes");
 const express = require("express");
+const authController = require("./auth.controller.ts");
 
 const authRouter = express.Router();
 
-authRouter.get("/", (req: Request, res: Response) => {
+authRouter.post("/login", (req: Request, res: Response) => {
   console.log("HELLO");
   if(req) {
-    res.status(StatusCodes.OK).json(StatusCodes.OK);
+    return authController.handleGetLogin(req, res);
+  } else {
+    res.status(StatusCodes.BAD_REQUEST).json(StatusCodes.BAD_REQUEST);
+  }    
+});
+
+authRouter.post("/signup", (req: Request, res: Response) => {
+  console.log("HELLO");
+  if(req) {
+    return authController.handleGetSignup(req, res);
   } else {
     res.status(StatusCodes.BAD_REQUEST).json(StatusCodes.BAD_REQUEST);
   }    
