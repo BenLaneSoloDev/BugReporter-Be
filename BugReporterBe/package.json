@@ -12,6 +12,7 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "cors": "^2.8.6",
     "express": "^5.2.1",
     "morgan": "^1.11.0"
   },
@@ -23,6 +24,7 @@
     "typescript": "^7.0.2"
   },
   "allowScripts": {
-    "tsx@4.23.12": true
+    "tsx@4.23.12": true,
+    "cors@2.8.6": true
   }
 }
