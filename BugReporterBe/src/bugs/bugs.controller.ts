@@ -3,6 +3,7 @@ const { StatusCodes, ReasonPhrases } = require("http-status-codes");
 
 async function handleGetBugs(req: Request, res: Response) {
   // TODO: ADD PROVIDER
+  
 };
 
 async function handlePostBugs(req: Request, res: Response) {
