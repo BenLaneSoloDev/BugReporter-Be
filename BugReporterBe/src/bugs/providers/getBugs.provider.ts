@@ -39,7 +39,7 @@ async function getBugsProvider(req: Request, res: Response)
       }
     }
 
-    return res.status(StatusCodes.CREATED).json(finalResponse);
+    return res.status(StatusCodes.OK).json(finalResponse);
   }
   catch (error) {
     return res.status(StatusCodes.GATEWAY_TIMEOUT).json({

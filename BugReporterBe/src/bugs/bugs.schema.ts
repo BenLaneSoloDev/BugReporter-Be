@@ -1,0 +1,84 @@
+import type { ObjectId } from "mongoose";
+const mongoose = require("mongoose");
+const { Schema, model } = require("mongoose");
+
+const bugSchema = new Schema({
+  project: {
+    type: Schema.Types.ObjectId,
+    ref: "Project", // The model this ID will map to
+    required: [true, "Bug must be linked to a Project"]
+  },
+  title: {
+    type: String,
+    required: [true, "Bug must have a title"],
+    trim: true,
+    maxLength: [100, "Title cannot exceed 100 characters"]
+  },
+  category: {
+    type: String,
+    required: [true, "Bug must have an assigned category"],
+    trim: true,
+    validate: {
+      validator: async function (this: { project?: ObjectId }, value: String) {
+        return true; // ! REMOVE WHEN PROJECT SCHEMA SETUP
+        if (!this.project) return false;
+        const foundProject = await mongoose.model("Project").findById(this.project).select("categories"); // ! CHANGE TO MATCH PROJECT
+        if (!foundProject) return false;
+        return foundProject.categories?.includes(value)  ?? false; // ! CHANGE TO MATCH PROJECT
+      },
+      message: ({ value } : { value: String }) => `${value} is not a valid category for this project`
+    },
+  },
+  severity: {
+    type: String,
+    required: [true, "Bugs must have a severity"],
+    enum: ["low", "normal", "high", "extreme"],
+    default: "normal"
+  },
+  stepsToReproduce: {
+    type: [String],
+    required: [true, "Bugs must contain steps to reproduce"],
+    validate: {
+      validator: function (value: [String]) {
+        return value.length <= 10; // Allows Only 10 Steps in a bug
+      },
+      message: () => "Cannot have more than 10 steps for reproduction"
+    }
+  },
+  environment: {
+    type: [String],
+    required: [true, "Bugs must contain environment details"],
+    validate: {
+      validator: async function (this: { project?: ObjectId}, value: [String]) {
+        return true; // ! REMOVE WHEN PROJECT SCHEMA SETUP
+        if (!this.project) return false;
+        const foundProject = await mongoose.model("Project").findById(this.project).select("environment"); // ! CHANGE TO MATCH PROJECT
+        if (!foundProject) return false;
+
+        let validEnvironment = true;
+        for(let i: number = 0; i < value.length; i++) {
+          validEnvironment = foundProject.environement?.includes(value[i]); // ! CHANGE TO MATCH PROJECT
+          if (!validEnvironment) break;
+        }
+
+        return validEnvironment;
+      },
+      message: ({ value } : { value: [String] }) => `${value} is not a valid environement setup for this project`
+    },
+  },
+  expectedResult: {
+    type: String,
+    required: [true, "Bug must have an expected result"],
+    trim: true,
+    maxLength: [250, "Expected result cannot exceed 250 characters"]
+  },
+  actualResult: {
+    type: String,
+    required: [true, "Bug must have an actual result"],
+    trim: true,
+    maxLength: [250, "Actual result cannot exceed 250 characters"]
+  },  
+}, { timestamps: true, versionKey: false });
+
+const Bug = model("Bug", bugSchema);
+module.exports = Bug;

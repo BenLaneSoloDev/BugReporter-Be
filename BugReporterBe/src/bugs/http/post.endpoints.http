@@ -1,2 +1,12 @@
 POST http://localhost:3001/bugs/
 Content-Type: application/json
+{
+  "project": "6592008029c8c3e4dc76256c",
+  "title": "title",
+  "category": "category",
+  "severity": "normal",
+  "stepsToReproduce": ["Step 1", "Step 2", "Step 3"],
+  "environment": ["Env 1", "Env 2"],
+  "expectedResult": "result",
+  "actualResult": "result"
+}
