@@ -1,18 +1,19 @@
 import type { Request, Response } from "express";
-const { StatusCodes, ReasonPhrases } = require("http-status-codes");
+const getBugsProvider = require("./providers/getBugs.provider.ts");
+const createBugProvider = require("./providers/createBug.provider.ts");
+const deleteBugProvider = require("./providers/deleteBug.provider.ts");
 
 async function handleGetBugs(req: Request, res: Response) {
-  // TODO: ADD PROVIDER
-  
+  return await getBugsProvider(req, res);
 };
 
 async function handlePostBugs(req: Request, res: Response) {
-  // TODO: ADD PROVIDER
+  return await createBugProvider(req, res);
 };
 
 async function handleDeleteBugs(req: Request, res: Response)
 {
-  // TODO: ADD PROVIDER
+  return await deleteBugProvider(req, res);
 };
 
 module.exports = { 

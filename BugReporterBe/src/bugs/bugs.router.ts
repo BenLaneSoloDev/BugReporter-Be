@@ -6,7 +6,7 @@ const bugsController = require("./bugs.controller.ts");
 const bugsRouter = express.Router();
 
 bugsRouter.get("/", (req: Request, res: Response) => {
-  // TODO: ADD VALIDATOR
+  // TODO: ADD VALIDATOR + AUTHENTICATOR
   if(req) {
     return bugsController.handleGetBugs(req, res);
   } else {
@@ -15,7 +15,7 @@ bugsRouter.get("/", (req: Request, res: Response) => {
 });
 
 bugsRouter.post("/", (req: Request, res: Response) => {
-  // TODO: ADD VALIDATOR
+  // TODO: ADD VALIDATOR + AUTHENTICATOR
   if(req) {
     return bugsController.handlePostBugs(req, res);
   } else {
@@ -24,7 +24,7 @@ bugsRouter.post("/", (req: Request, res: Response) => {
 });
 
 bugsRouter.delete("/", (req: Request, res: Response) => {
-  // TODO: ADD VALIDATOR
+  // TODO: ADD VALIDATOR + AUTHENTICATOR
   if(req) {
     return bugsController.handleDeleteBugs(req, res);
   } else {
