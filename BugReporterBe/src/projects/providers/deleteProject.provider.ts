@@ -1,5 +1,6 @@
 import type { Request, Response } from "express";
 const { StatusCodes, ReasonPhrases } = require("http-status-codes");
+const Project = require("../projects.schema.ts");
 
 async function deleteProjectProvider(req: Request, res: Response)
 {
@@ -7,9 +8,10 @@ async function deleteProjectProvider(req: Request, res: Response)
 
   try {
 
-    // ? Delete the project from the database
+    const id = req.params.projectId;
+    const deletedProject = await Project.deleteOne({ _id: id });
 
-    return res.status(StatusCodes.OK).json({ item: "The project deleted" });
+    return res.status(StatusCodes.OK).json(deletedProject);
   }
   catch (error) {
     return res.status(StatusCodes.GATEWAY_TIMEOUT).json({
