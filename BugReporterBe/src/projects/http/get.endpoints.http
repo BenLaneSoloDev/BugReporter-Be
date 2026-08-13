@@ -1,2 +1,2 @@
-GET http://localhost:3001/projects/
+GET http://localhost:3001/projects?limit=3&page=1
 Content-Type: application/json
