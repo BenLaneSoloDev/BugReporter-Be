@@ -1,2 +1,8 @@
 POST http://localhost:3001/projects/
 Content-Type: application/json
+{
+  "title": "title",
+  "description": "description",
+  "developmentAreas": ["UI", "UX", "API"],
+  "environments": ["Windows, Mac, Linux, Google"]
+} 
