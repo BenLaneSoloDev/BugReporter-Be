@@ -14,10 +14,10 @@ async function createBugProvider(req: Request, res: Response)
     const bug = new Bug({
       project: req.body.project,
       title: req.body.title,
-      category: req.body.category,
+      developmentArea: req.body.developmentArea,
       severity: req.body.severity,
       stepsToReproduce: req.body.stepsToReproduce,
-      environment: req.body.environment,
+      environmentsUsed: req.body.environmentsUsed,
       expectedResult: req.body.expectedResult,
       actualResult: req.body.actualResult
     })

@@ -14,19 +14,19 @@ const bugSchema = new Schema({
     trim: true,
     maxLength: [100, "Title cannot exceed 100 characters"]
   },
-  category: {
+  developmentArea: {
     type: String,
-    required: [true, "Bug must have an assigned category"],
+    required: [true, "Bug must have a development area"],
     trim: true,
     validate: {
       validator: async function (this: { project?: ObjectId }, value: String) {
         return true; // ! REMOVE WHEN PROJECT SCHEMA SETUP
         if (!this.project) return false;
-        const foundProject = await mongoose.model("Project").findById(this.project).select("categories"); // ! CHANGE TO MATCH PROJECT
+        const foundProject = await mongoose.model("Project").findById(this.project).select("developmentAreas");
         if (!foundProject) return false;
-        return foundProject.categories?.includes(value)  ?? false; // ! CHANGE TO MATCH PROJECT
+        return foundProject.developmentAreas?.includes(value)  ?? false;
       },
-      message: ({ value } : { value: String }) => `${value} is not a valid category for this project`
+      message: ({ value } : { value: String }) => `${value} is not a valid development area for this project`
     },
   },
   severity: {
@@ -45,19 +45,19 @@ const bugSchema = new Schema({
       message: () => "Cannot have more than 10 steps for reproduction"
     }
   },
-  environment: {
+  environmentsUsed: {
     type: [String],
     required: [true, "Bugs must contain environment details"],
     validate: {
       validator: async function (this: { project?: ObjectId}, value: [String]) {
         return true; // ! REMOVE WHEN PROJECT SCHEMA SETUP
         if (!this.project) return false;
-        const foundProject = await mongoose.model("Project").findById(this.project).select("environment"); // ! CHANGE TO MATCH PROJECT
+        const foundProject = await mongoose.model("Project").findById(this.project).select("environments");
         if (!foundProject) return false;
 
         let validEnvironment = true;
         for(let i: number = 0; i < value.length; i++) {
-          validEnvironment = foundProject.environement?.includes(value[i]); // ! CHANGE TO MATCH PROJECT
+          validEnvironment = foundProject.environements?.includes(value[i]);
           if (!validEnvironment) break;
         }
 
