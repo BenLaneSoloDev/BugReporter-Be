@@ -1,4 +1,4 @@
-GET http://localhost:3001/bugs
+GET http://localhost:3001/bugs?limit=2&page=1
 Content-Type: application/json
 
 GET http://localhost:3001/projects/6a7d9e44daed38dd97608444/bugs

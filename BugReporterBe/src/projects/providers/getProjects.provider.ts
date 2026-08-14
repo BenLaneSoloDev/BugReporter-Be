@@ -13,7 +13,7 @@ async function getProjectsProvider(req: Request, res: Response)
     const page: number = typeof(req.query.page) === "string" ? parseInt(req.query.page, 10) : 1;
     const baseURL = `${req.protocol}://${req.get("host")}${req.originalUrl.split("?")[0]}`;
 
-    const projects = await Project.find().sort({ title: 1 }); // Grabs all projects in alphabetical order
+    const projects = await Project.find().limit(limit).skip(page-1).sort({ title: 1 }); // Grabs all projects in alphabetical order
 
     const returnData = {
       data: projects,

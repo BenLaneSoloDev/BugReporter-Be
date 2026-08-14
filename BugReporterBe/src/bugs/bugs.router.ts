@@ -17,7 +17,6 @@ bugsRouter.get("/", (req: Request, res: Response) => {
 
 bugsRouter.post("/", (req: Request, res: Response) => {
   // TODO: ADD VALIDATOR + AUTHENTICATOR
-  // ? Should only create bug if :ProjectId parameter is valid (ignore /bugs requests, accept /projects/:projectId/bugs requests)
   if(req) {
     return bugsController.handlePostBugs(req, res);
   } else {
