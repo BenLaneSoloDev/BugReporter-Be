@@ -1,5 +1,8 @@
-GET http://localhost:3001/bugs/
+GET http://localhost:3001/bugs
 Content-Type: application/json
-{
-  "project": "hello"
-}
+
+GET http://localhost:3001/projects/6a7d9e44daed38dd97608444/bugs
+Content-Type: application/json
+
+GET http://localhost:3001/projects/6a7ef9c9080fe30b15c4a3d8/bugs 
+Content-Type: application/json

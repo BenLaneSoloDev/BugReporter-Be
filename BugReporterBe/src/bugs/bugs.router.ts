@@ -7,7 +7,7 @@ const bugsRouter = express.Router({ mergeParams: true }); // Allows ProjectID to
 
 bugsRouter.get("/", (req: Request, res: Response) => {
   // TODO: ADD VALIDATOR + AUTHENTICATOR
-  // ? Should get all 
+  // ? Should get all, with projectID or not
   if(req) {
     return bugsController.handleGetBugs(req, res);
   } else {

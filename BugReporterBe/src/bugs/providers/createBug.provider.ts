@@ -8,11 +8,11 @@ async function createBugProvider(req: Request, res: Response)
 
   try {
 
-    console.log("Request: ", req);
+    const projectId = req.params.projectId;
+    if (!projectId) throw new Error("No project assigned to bug");
 
-    // ? Add user ID to this object
     const bug = new Bug({
-      project: req.body.project,
+      project: projectId,
       title: req.body.title,
       developmentArea: req.body.developmentArea,
       severity: req.body.severity,
@@ -22,7 +22,6 @@ async function createBugProvider(req: Request, res: Response)
       actualResult: req.body.actualResult
     })
 
-    // ? Add this new bug to the database
     await bug.save();
 
     return res.status(StatusCodes.CREATED).json(bug);
