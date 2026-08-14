@@ -7,7 +7,6 @@ const bugsRouter = express.Router({ mergeParams: true }); // Allows ProjectID to
 
 bugsRouter.get("/", (req: Request, res: Response) => {
   // TODO: ADD VALIDATOR + AUTHENTICATOR
-  // ? Should get all, with projectID or not
   if(req) {
     return bugsController.handleGetBugs(req, res);
   } else {
@@ -26,7 +25,6 @@ bugsRouter.post("/", (req: Request, res: Response) => {
 
 bugsRouter.delete("/:bugId", (req: Request, res: Response) => {
   // TODO: ADD VALIDATOR + AUTHENTICATOR
-  // ? Deletes a Bug with specific id, should only work if no projectID is present
   if(req) {
     return bugsController.handleDeleteBugs(req, res);
   } else {

@@ -1,5 +1,6 @@
 import type { Request, Response } from "express";
 const { StatusCodes, ReasonPhrases } = require("http-status-codes");
+const Bug = require("../bugs.schema.ts");
 
 async function deleteBugProvider(req: Request, res: Response)
 {
@@ -7,9 +8,11 @@ async function deleteBugProvider(req: Request, res: Response)
 
   try {
 
-    // ? Delete the bug from the database
+    const bugId = req.params.bugId;
+    
+    const deletedBug = await Bug.deleteOne({ _id: bugId });
 
-    return res.status(StatusCodes.OK).json({ item: "The bug deleted" });
+    return res.status(StatusCodes.OK).json(deletedBug);
   }
   catch (error) {
     return res.status(StatusCodes.GATEWAY_TIMEOUT).json({
