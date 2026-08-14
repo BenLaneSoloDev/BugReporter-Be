@@ -19,10 +19,12 @@
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "express-validator": "^7.3.2",
+    "express-winston": "^4.2.0",
     "http-status-codes": "^2.3.0",
     "mongodb": "^7.5.0",
     "mongoose": "^9.9.2",
-    "morgan": "^1.11.0"
+    "morgan": "^1.11.0",
+    "winston": "^3.19.0"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
@@ -39,6 +41,8 @@
     "mongoose@9.9.2": true,
     "cross-env@10.1.0": true,
     "dotenv@17.4.2": true,
-    "express-validator@7.3.2": true
+    "express-validator@7.3.2": true,
+    "express-winston@4.2.0": true,
+    "winston@3.19.0": true
   }
 }
