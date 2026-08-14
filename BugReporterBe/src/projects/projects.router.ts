@@ -6,6 +6,9 @@ const projectsController = require("./projects.controller.ts");
 const projectsRouter = express.Router();
 const bugRouter = require("../bugs/bugs.router.ts");
 
+const { validationResult } = require("express-validator");
+const createProjectValidator = require("./validators/createProject.validator.ts");
+
 projectsRouter.get("/", (req: Request, res: Response) => {
   // TODO: ADD VALIDATOR
   if(req) {
@@ -15,13 +18,16 @@ projectsRouter.get("/", (req: Request, res: Response) => {
   }    
 });
 
-projectsRouter.post("/", (req: Request, res: Response) => {
-  // TODO: ADD VALIDATOR
-  if(req) {
+projectsRouter.post("/", createProjectValidator, (req: Request, res: Response) => {
+
+  const result = validationResult(req);
+
+  if(result.isEmpty()) {
     return projectsController.handlePostProjects(req, res);
   } else {
-    res.status(StatusCodes.BAD_REQUEST).json(StatusCodes.BAD_REQUEST);
+    res.status(StatusCodes.BAD_REQUEST).json(result.array());
   }    
+  
 });
 
 projectsRouter.delete("/:projectId", (req: Request, res: Response) => {

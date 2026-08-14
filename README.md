@@ -7,3 +7,4 @@ Bug Report Wizard backend server repository.
 - MongoDB
 - Mongoose  
 - Express
+- ? Express Validator

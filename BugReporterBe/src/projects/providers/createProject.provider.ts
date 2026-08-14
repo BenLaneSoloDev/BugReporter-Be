@@ -1,24 +1,19 @@
 import type { Request, Response } from "express";
 const { StatusCodes, ReasonPhrases } = require("http-status-codes");
 const Project = require("../projects.schema.ts");
+const { matchedData } = require("express-validator");
 
 async function createProjectProvider(req: Request, res: Response)
 {
-  const data = req; // Validate using express validator
-
-  try {
-
-    // ! Replace User ID with authenticated user
+  const validatedResult = matchedData(req);
+  // ! Replace User ID with authenticated user
     const project = new Project({
       user: "00000020f51bb4362eee2a4d",
-      title: req.body.title,
-      description: req.body.description,
-      developmentAreas: req.body.developmentAreas,
-      environments: req.body.environments
+      ...validatedResult
     });
 
+  try {
     await project.save();
-
     return res.status(StatusCodes.OK).json({ item: "The project created" });
   }
   catch (error) {
