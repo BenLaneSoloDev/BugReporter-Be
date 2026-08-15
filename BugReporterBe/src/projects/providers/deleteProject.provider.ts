@@ -1,15 +1,16 @@
 import type { Request, Response } from "express";
 const { StatusCodes, ReasonPhrases } = require("http-status-codes");
 const Project = require("../projects.schema.ts");
+const { matchedData } = require("express-validator");
 const errorLogger = require("../../helpers/errorLogger.helper.ts");
 
 async function deleteProjectProvider(req: Request, res: Response)
 {
-  const data = req; // Validate using express validator
+  const validatedResult = matchedData(req); 
 
   try {
 
-    const id = req.params.projectId;
+    const id = validatedResult.projectId;
     const deletedProject = await Project.deleteOne({ _id: id });
 
     return res.status(StatusCodes.OK).json(deletedProject);

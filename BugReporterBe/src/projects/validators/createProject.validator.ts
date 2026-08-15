@@ -1,3 +1,4 @@
+export {};
 const { body } = require("express-validator"); 
 
 const createProjectValidator = [
