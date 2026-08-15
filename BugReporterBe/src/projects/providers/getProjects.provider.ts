@@ -1,6 +1,7 @@
 import type { Request, Response } from "express";
 const { StatusCodes, ReasonPhrases } = require("http-status-codes");
 const Project = require("../projects.schema.ts");
+const errorLogger = require("../../helpers/errorLogger.helper.ts");
 
 async function getProjectsProvider(req: Request, res: Response)
 {
@@ -39,6 +40,7 @@ async function getProjectsProvider(req: Request, res: Response)
     return res.status(StatusCodes.OK).json(returnData);
   }
   catch (error) {
+    if (error instanceof Error) errorLogger(`Error getting projects: ${error.message}`, req, error);
     return res.status(StatusCodes.GATEWAY_TIMEOUT).json({
       reason: "Unable to process your request at this moment, please try later"
     });
