@@ -27,7 +27,9 @@
     "winston": "^3.19.0"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
+    "@types/morgan": "^1.9.10",
     "@types/node": "^26.2.0",
     "ts-node": "^10.9.2",
     "tsx": "^4.23.12",
@@ -43,6 +45,8 @@
     "dotenv@17.4.2": true,
     "express-validator@7.3.2": true,
     "express-winston@4.2.0": true,
-    "winston@3.19.0": true
+    "winston@3.19.0": true,
+    "@types/cors@2.8.19": true,
+    "@types/morgan@1.9.10": true
   }
 }

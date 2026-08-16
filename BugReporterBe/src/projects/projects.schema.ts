@@ -1,5 +1,4 @@
-import type { ObjectId } from "mongoose";
-const { Schema, model } = require("mongoose");
+import { Schema, model } from "mongoose";
 
 const projectSchema = new Schema({
   user: {
@@ -29,4 +28,4 @@ const projectSchema = new Schema({
 }, { timestamps: true, versionKey: false });
 
 const Project = model("Project", projectSchema);
-module.exports = Project;
+export default Project;

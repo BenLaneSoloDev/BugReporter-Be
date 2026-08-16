@@ -1,12 +1,12 @@
-const expressWinston = require("express-winston");
-const logger = require("../helpers/winston.helper.ts");
+import expressWinston from "express-winston";
+import logger from "../helpers/winston.helper.ts";
 
 const expressWinstonLogger = expressWinston.logger({
   winstonInstance: logger,
   meta: true,
-  msf: `HTTP {{req.method}} {{req.url}} responded with {{res.statusCode}} in {{res.responseTime}}ms`,
+  msg: `HTTP {{req.method}} {{req.url}} responded with {{res.statusCode}} in {{res.responseTime}}ms`,
   expressFormat: true,
   colorize: true
 })
 
-module.exports = expressWinstonLogger;
+export default expressWinstonLogger;

@@ -1,8 +1,8 @@
 import type { Express, Request, Response } from "express";
-const configureApp = require("./settings/config.ts");
-const express = require("express");
-const mongoose = require("mongoose");
-const dotenv = require("dotenv");
+import configureApp from "./settings/config.ts";
+import express from "express";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
 
 process.env.NODE_ENV = process.env.NODE_ENV || "development";
 const envFile = `.env.${process.env.NODE_ENV}`;
@@ -16,8 +16,8 @@ configureApp(app);
 async function bootstrap() {
   try {
     await mongoose.connect(
-      process.env.DATABASE_URL,
-      { dbName: process.env.DATABASE_NAME }
+      process.env.DATABASE_URL as string,
+      { dbName: process.env.DATABASE_NAME as string }
     );
     console.log("Connected to MongoDB");
     app.listen(port, () => {

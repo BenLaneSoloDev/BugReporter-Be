@@ -1,5 +1,4 @@
-export {};
-const { body } = require("express-validator"); 
+import { body } from "express-validator"; 
 
 const createProjectValidator = [
   body("title", "The title cannot be empty").notEmpty(),
@@ -14,4 +13,4 @@ const createProjectValidator = [
   body("environments.*", "Environments must be strings").isString().trim(),
 ]
 
-module.exports = createProjectValidator;
+export default createProjectValidator;

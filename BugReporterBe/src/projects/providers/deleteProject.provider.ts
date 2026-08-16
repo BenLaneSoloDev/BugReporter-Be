@@ -1,8 +1,8 @@
 import type { Request, Response } from "express";
-const { StatusCodes, ReasonPhrases } = require("http-status-codes");
-const Project = require("../projects.schema.ts");
-const { matchedData } = require("express-validator");
-const errorLogger = require("../../helpers/errorLogger.helper.ts");
+import { StatusCodes, ReasonPhrases } from "http-status-codes";
+import Project from "../projects.schema.ts";
+import { matchedData } from "express-validator";
+import errorLogger from "../../helpers/errorLogger.helper.ts";
 
 async function deleteProjectProvider(req: Request, res: Response)
 {
@@ -23,4 +23,4 @@ async function deleteProjectProvider(req: Request, res: Response)
   }
 };
 
-module.exports = deleteProjectProvider;
+export default deleteProjectProvider;

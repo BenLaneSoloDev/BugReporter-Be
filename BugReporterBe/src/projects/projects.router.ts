@@ -1,22 +1,22 @@
 import type { Express, Request, Response } from "express";
-const { StatusCodes } = require("http-status-codes");
-const express = require("express");
-const projectsController = require("./projects.controller.ts");
+import { StatusCodes } from "http-status-codes";
+import express from "express";
+import { handleGetProjects, handlePostProjects, handleDeleteProjects } from "./projects.controller.ts";
+import bugRouter from "../bugs/bugs.router.ts";
+
+import { validationResult } from "express-validator";
+import createProjectValidator from "./validators/createProject.validator.ts";
+import deleteProjectValidator from "./validators/deleteProject.validator.ts";
+import getProjectValidator from "./validators/getProjects.validator";
 
 const projectsRouter = express.Router();
-const bugRouter = require("../bugs/bugs.router.ts");
-
-const { validationResult } = require("express-validator");
-const createProjectValidator = require("./validators/createProject.validator.ts");
-const deleteProjectValidator = require("./validators/deleteProject.validator.ts");
-import getProjectValidator from "./validators/getProjects.validator";
 
 projectsRouter.get("/", getProjectValidator, (req: Request, res: Response) => {
 
   const result = validationResult(req);
 
   if(result.isEmpty()) {
-    return projectsController.handleGetProjects(req, res);
+    return handleGetProjects(req, res);
   } else {
     res.status(StatusCodes.BAD_REQUEST).json(result.array());
   }    
@@ -28,7 +28,7 @@ projectsRouter.post("/", createProjectValidator, (req: Request, res: Response) =
   const result = validationResult(req);
 
   if(result.isEmpty()) {
-    return projectsController.handlePostProjects(req, res);
+    return handlePostProjects(req, res);
   } else {
     res.status(StatusCodes.BAD_REQUEST).json(result.array());
   }    
@@ -40,7 +40,7 @@ projectsRouter.delete("/:projectId", deleteProjectValidator, (req: Request, res:
   const result = validationResult(req);
 
   if(result.isEmpty()) {
-    return projectsController.handleDeleteProjects(req, res);
+    return handleDeleteProjects(req, res);
   } else {
     res.status(StatusCodes.BAD_REQUEST).json(result.array());
   }    
@@ -49,4 +49,4 @@ projectsRouter.delete("/:projectId", deleteProjectValidator, (req: Request, res:
 
 projectsRouter.use("/:projectId/bugs", bugRouter); // Allow ProjectID to be passed through URL
 
-module.exports = projectsRouter;
+export default projectsRouter;

@@ -11,4 +11,4 @@ function errorLogger(message: String, req: Request, error: Error) {
   });
 }
 
-module.exports = errorLogger;
+export default errorLogger;

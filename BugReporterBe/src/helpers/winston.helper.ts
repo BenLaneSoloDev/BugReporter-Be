@@ -1,5 +1,5 @@
-const winston = require("winston");
-const path = require("path");
+import winston from "winston";
+import path from "path";
 import type { TransformableInfo } from "logform";
 
 const transports = [
@@ -29,4 +29,4 @@ const logger = winston.createLogger({
   transports: transports
 });
 
-module.exports = logger;
+export default logger;

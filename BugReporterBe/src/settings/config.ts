@@ -1,15 +1,15 @@
 import type { Express } from "express";
-const express = require("express");
-const fs = require("fs");               // Node.js API
-const path = require("path");           // Node.js API
-const morgan = require("morgan");
-const cors= require("cors");
+import express from "express";
+import fs from "fs";               // Node.js API
+import path from "path";           // Node.js API
+import morgan from "morgan";
+import cors from "cors";
 
-const expressWinstonLogger = require("../middleware/expressWinston.middleware.ts")
+import expressWinstonLogger from "../middleware/expressWinston.middleware.ts";
 
-const projectsRouter = require("../projects/projects.router.ts");
-const bugsRouter = require("../bugs/bugs.router.ts");
-const authRouter = require("../auth/auth.router.ts");
+import projectsRouter from "../projects/projects.router.ts";
+import bugsRouter from "../bugs/bugs.router.ts";
+import authRouter from "../auth/auth.router.ts";
 
 function configureApp(app: Express) : void
 {
@@ -35,4 +35,4 @@ function configureApp(app: Express) : void
   // TODO: CATCH INVALID ROUTES
 }
 
-module.exports = configureApp;
+export default configureApp;

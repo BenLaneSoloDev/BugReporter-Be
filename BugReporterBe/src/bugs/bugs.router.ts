@@ -1,14 +1,14 @@
 import type { Express, Request, Response } from "express";
-const { StatusCodes } = require("http-status-codes");
-const express = require("express");
-const bugsController = require("./bugs.controller.ts");
+import { StatusCodes } from "http-status-codes";
+import express from "express";
+import {handleGetBugs, handlePostBugs, handleDeleteBugs } from "./bugs.controller.ts";
 
 const bugsRouter = express.Router({ mergeParams: true }); // Allows ProjectID to be read from parent
 
 bugsRouter.get("/", (req: Request, res: Response) => {
   // TODO: ADD VALIDATOR + AUTHENTICATOR
   if(req) {
-    return bugsController.handleGetBugs(req, res);
+    return handleGetBugs(req, res);
   } else {
     res.status(StatusCodes.BAD_REQUEST).json(StatusCodes.BAD_REQUEST);
   }    
@@ -17,7 +17,7 @@ bugsRouter.get("/", (req: Request, res: Response) => {
 bugsRouter.post("/", (req: Request, res: Response) => {
   // TODO: ADD VALIDATOR + AUTHENTICATOR
   if(req) {
-    return bugsController.handlePostBugs(req, res);
+    return handlePostBugs(req, res);
   } else {
     res.status(StatusCodes.BAD_REQUEST).json(StatusCodes.BAD_REQUEST);
   }    
@@ -26,10 +26,10 @@ bugsRouter.post("/", (req: Request, res: Response) => {
 bugsRouter.delete("/:bugId", (req: Request, res: Response) => {
   // TODO: ADD VALIDATOR + AUTHENTICATOR
   if(req) {
-    return bugsController.handleDeleteBugs(req, res);
+    return handleDeleteBugs(req, res);
   } else {
     res.status(StatusCodes.BAD_REQUEST).json(StatusCodes.BAD_REQUEST);
   }    
 });
 
-module.exports = bugsRouter;
+export default bugsRouter;

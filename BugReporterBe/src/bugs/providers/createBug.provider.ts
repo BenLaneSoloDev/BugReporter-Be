@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
-const { StatusCodes, ReasonPhrases } = require("http-status-codes");
-const Bug = require("../bugs.schema.ts");
-const errorLogger = require("../../helpers/errorLogger.helper.ts");
+import { StatusCodes, ReasonPhrases } from "http-status-codes";
+import Bug from "../bugs.schema.ts";
+import errorLogger from "../../helpers/errorLogger.helper.ts";
 
 async function createBugProvider(req: Request, res: Response)
 {
@@ -35,4 +35,4 @@ async function createBugProvider(req: Request, res: Response)
   }
 };
 
-module.exports = createBugProvider;
+export default createBugProvider;

@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
-const { StatusCodes, ReasonPhrases } = require("http-status-codes");
-const Project = require("../projects.schema.ts");
-const errorLogger = require("../../helpers/errorLogger.helper.ts");
+import { StatusCodes, ReasonPhrases } from"http-status-codes";
+import Project from "../projects.schema.ts";
+import errorLogger from "../../helpers/errorLogger.helper.ts";
 import { matchedData } from "express-validator";
 
 async function getProjectsProvider(req: Request, res: Response)
@@ -48,4 +48,4 @@ async function getProjectsProvider(req: Request, res: Response)
   }
 };
 
-module.exports = getProjectsProvider;
+export default getProjectsProvider;

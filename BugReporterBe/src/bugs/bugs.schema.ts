@@ -1,6 +1,6 @@
 import type { ObjectId } from "mongoose";
-const mongoose = require("mongoose");
-const { Schema, model } = require("mongoose");
+import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
 
 const bugSchema = new Schema({
   project: {
@@ -81,4 +81,4 @@ const bugSchema = new Schema({
 }, { timestamps: true, versionKey: false });
 
 const Bug = model("Bug", bugSchema);
-module.exports = Bug;
+export default Bug;
