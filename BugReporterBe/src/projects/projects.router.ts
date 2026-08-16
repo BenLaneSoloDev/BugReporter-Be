@@ -9,14 +9,18 @@ const bugRouter = require("../bugs/bugs.router.ts");
 const { validationResult } = require("express-validator");
 const createProjectValidator = require("./validators/createProject.validator.ts");
 const deleteProjectValidator = require("./validators/deleteProject.validator.ts");
+import getProjectValidator from "./validators/getProjects.validator";
 
-projectsRouter.get("/", (req: Request, res: Response) => {
-  // TODO: ADD VALIDATOR
-  if(req) {
+projectsRouter.get("/", getProjectValidator, (req: Request, res: Response) => {
+
+  const result = validationResult(req);
+
+  if(result.isEmpty()) {
     return projectsController.handleGetProjects(req, res);
   } else {
-    res.status(StatusCodes.BAD_REQUEST).json(StatusCodes.BAD_REQUEST);
+    res.status(StatusCodes.BAD_REQUEST).json(result.array());
   }    
+
 });
 
 projectsRouter.post("/", createProjectValidator, (req: Request, res: Response) => {
@@ -40,6 +44,7 @@ projectsRouter.delete("/:projectId", deleteProjectValidator, (req: Request, res:
   } else {
     res.status(StatusCodes.BAD_REQUEST).json(result.array());
   }    
+
 });
 
 projectsRouter.use("/:projectId/bugs", bugRouter); // Allow ProjectID to be passed through URL
