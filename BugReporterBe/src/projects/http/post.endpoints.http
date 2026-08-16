@@ -4,5 +4,5 @@ Content-Type: application/json
   "title": "New Title",
   "description": "description",
   "developmentAreas": ["UI", "UX", "API"],
-  "environments": ["Windows, Mac, Linux, Google"]
+  "environments": ["Windows", "Mac", "Linux", "Google"]
 } 

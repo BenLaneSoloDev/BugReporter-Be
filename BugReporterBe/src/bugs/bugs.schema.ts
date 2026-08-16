@@ -20,7 +20,6 @@ const bugSchema = new Schema({
     trim: true,
     validate: {
       validator: async function (this: { project?: ObjectId }, value: String) {
-        return true; // ! REMOVE WHEN PROJECT SCHEMA SETUP
         if (!this.project) return false;
         const foundProject = await mongoose.model("Project").findById(this.project).select("developmentAreas");
         if (!foundProject) return false;
@@ -36,21 +35,24 @@ const bugSchema = new Schema({
     default: "normal"
   },
   stepsToReproduce: {
-    type: [String],
+    type: [{
+      type: String,
+      maxLength: [100, "Each step for reproduction must be less than 100 characters"],
+      trim: true
+    }],
     required: [true, "Bugs must contain steps to reproduce"],
     validate: {
       validator: function (value: [String]) {
-        return value.length <= 10; // Allows Only 10 Steps in a bug
+        return value.length <= 10 && value; // Allows Only 10 Steps in a bug, and each cannot exceed 100
       },
       message: () => "Cannot have more than 10 steps for reproduction"
-    }
+    },
   },
   environmentsUsed: {
     type: [String],
     required: [true, "Bugs must contain environment details"],
     validate: {
       validator: async function (this: { project?: ObjectId}, value: [String]) {
-        return true; // ! REMOVE WHEN PROJECT SCHEMA SETUP
         if (!this.project) return false;
         const foundProject = await mongoose.model("Project").findById(this.project).select("environments");
         if (!foundProject) return false;

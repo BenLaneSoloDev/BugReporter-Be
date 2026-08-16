@@ -2,25 +2,26 @@ import type { Request, Response } from "express";
 import { StatusCodes, ReasonPhrases } from "http-status-codes";
 import Bug from "../bugs.schema.ts";
 import errorLogger from "../../helpers/errorLogger.helper.ts";
+import { matchedData } from "express-validator";
 
 async function createBugProvider(req: Request, res: Response)
 {
-  const data = req; // Validate using express validator
+  const validatedResult = matchedData(req);
 
   try {
 
-    const projectId = req.params.projectId;
+    const projectId = validatedResult.projectId;
     if (!projectId) throw new Error("No project assigned to bug");
 
     const bug = new Bug({
       project: projectId,
-      title: req.body.title,
-      developmentArea: req.body.developmentArea,
-      severity: req.body.severity,
-      stepsToReproduce: req.body.stepsToReproduce,
-      environmentsUsed: req.body.environmentsUsed,
-      expectedResult: req.body.expectedResult,
-      actualResult: req.body.actualResult
+      title: validatedResult.title,
+      developmentArea: validatedResult.developmentArea,
+      severity: validatedResult.severity,
+      stepsToReproduce: validatedResult.stepsToReproduce,
+      environmentsUsed: validatedResult.environmentsUsed,
+      expectedResult: validatedResult.expectedResult,
+      actualResult: validatedResult.actualResult
     })
 
     await bug.save();
