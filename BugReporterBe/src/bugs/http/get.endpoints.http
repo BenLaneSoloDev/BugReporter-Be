@@ -4,5 +4,5 @@ Content-Type: application/json
 GET http://localhost:3001/projects/6a7d9e44daed38dd97608444/bugs
 Content-Type: application/json
 
-GET http://localhost:3001/projects/6a7ef9c9080fe30b15c4a3d8/bugs 
+GET http://localhost:3001/projects/6a81f168c3c23c08be0fb5e2/bugs 
 Content-Type: application/json

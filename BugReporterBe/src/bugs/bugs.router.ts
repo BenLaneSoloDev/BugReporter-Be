@@ -4,13 +4,13 @@ import express from "express";
 import {handleGetBugs, handlePostBugs, handleDeleteBugs } from "./bugs.controller.ts";
 
 import { validationResult } from "express-validator";
-
+import getBugsValidator from "./validators/getBugs.validator.ts";
 import createBugValidator from "./validators/createBug.validator.ts";
 import deleteBugValidator from "./validators/deleteBug.validator.ts";
 
 const bugsRouter = express.Router({ mergeParams: true }); // Allows ProjectID to be read from parent
 
-bugsRouter.get("/", (req: Request, res: Response) => {
+bugsRouter.get("/", getBugsValidator, (req: Request, res: Response) => {
   
   const result = validationResult(req);
 
