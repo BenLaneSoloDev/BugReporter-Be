@@ -13,10 +13,7 @@ async function deleteBugProvider(req: Request, res: Response)
     const bugId = validatedResult.bugId;
     
     const deletedBug = await Bug.deleteOne({ _id: bugId });
-
-    // TODO: Setup If Bug/Project actually exists within the validator
-    if (deletedBug.deletedCount === 0) throw new Error(`No bug exists for this BugID (${bugId})`);
-
+    
     return res.status(StatusCodes.OK).json(deletedBug);
   }
   catch (error) {

@@ -1,2 +1,2 @@
-DELETE http://localhost:3001/bugs/6a81f2ff814ecfe5eea18505
+DELETE http://localhost:3001/bugs/6a830231b8a7f7ac56ed9a23
 Content-Type: application/json
