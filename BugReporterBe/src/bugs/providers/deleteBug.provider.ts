@@ -2,16 +2,19 @@ import type { Request, Response } from "express";
 import { StatusCodes, ReasonPhrases } from "http-status-codes";
 import Bug from "../bugs.schema.ts";
 import errorLogger from "../../helpers/errorLogger.helper.ts";
+import { matchedData } from "express-validator";
 
 async function deleteBugProvider(req: Request, res: Response)
 {
-  const data = req; // Validate using express validator
+  const validatedResult = matchedData(req);
 
   try {
 
-    const bugId = req.params.bugId;
+    const bugId = validatedResult.bugId;
     
     const deletedBug = await Bug.deleteOne({ _id: bugId });
+
+    if (deletedBug.deletedCount === 0) throw new Error(`No bug exists for this BugID (${bugId})`);
 
     return res.status(StatusCodes.OK).json(deletedBug);
   }

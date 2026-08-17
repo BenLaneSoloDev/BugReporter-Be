@@ -3,8 +3,10 @@ import { StatusCodes } from "http-status-codes";
 import express from "express";
 import {handleGetBugs, handlePostBugs, handleDeleteBugs } from "./bugs.controller.ts";
 
-import { validationResult } from "express-validator"
+import { validationResult } from "express-validator";
+
 import createBugValidator from "./validators/createBug.validator.ts";
+import deleteBugValidator from "./validators/deleteBug.validator.ts";
 
 const bugsRouter = express.Router({ mergeParams: true }); // Allows ProjectID to be read from parent
 
@@ -32,12 +34,14 @@ bugsRouter.post("/", createBugValidator, (req: Request, res: Response) => {
 
 });
 
-bugsRouter.delete("/:bugId", (req: Request, res: Response) => {
-  // TODO: ADD VALIDATOR + AUTHENTICATOR
-  if(req) {
+bugsRouter.delete("/:bugId", deleteBugValidator, (req: Request, res: Response) => {
+
+  const result = validationResult(req);
+
+  if(result.isEmpty()) {
     return handleDeleteBugs(req, res);
   } else {
-    res.status(StatusCodes.BAD_REQUEST).json(StatusCodes.BAD_REQUEST);
+    res.status(StatusCodes.BAD_REQUEST).json(result.array());
   }    
   
 });
