@@ -1,9 +1,10 @@
-import type { Express } from "express";
+import type { Express, Request, Response } from "express";
 import express from "express";
 import fs from "fs";               // Node.js API
 import path from "path";           // Node.js API
 import morgan from "morgan";
 import cors from "cors";
+import { StatusCodes } from "http-status-codes";
 
 import expressWinstonLogger from "../middleware/expressWinston.middleware.ts";
 
@@ -35,7 +36,9 @@ function configureApp(app: Express) : void
 
   // TODO: ADDED API DOC ROUTE
 
-  // TODO: CATCH INVALID ROUTES
+  app.use((req, res) => {
+    res.status(StatusCodes.NOT_FOUND).json(null);
+  });
 }
 
 export default configureApp;
