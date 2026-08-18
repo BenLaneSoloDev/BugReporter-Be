@@ -1,6 +1,21 @@
-import { body } from "express-validator"; 
+import { body, type Meta, matchedData } from "express-validator"; 
+import hasValidField from "../../helpers/hasValidField.helper";
+import mongoose from "mongoose";
 
 const createProjectValidator = [
+  body("user", "A project must be linked to a valid UserID").notEmpty().isMongoId(),
+  body("user").if((_value, meta: Meta) => { return hasValidField(meta, "user") }).custom(async (_value, meta: Meta) => 
+      {
+        const req = meta.req as Request;
+  
+        const cleanData = matchedData(req);
+        const userId = cleanData.user;
+  
+        const userExists = await mongoose.model("User").exists({ _id: userId });
+        if (!userExists) throw new Error("No user exists for the provided UserID");
+        return true;
+      }
+    ),
   body("title", "The title cannot be empty").notEmpty(),
   body("title", "The title must be a string").isString(),
   body("title", "The title must be less than 100 characters").isLength({ max: 100 }).trim(),

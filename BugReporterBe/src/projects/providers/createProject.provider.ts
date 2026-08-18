@@ -7,15 +7,11 @@ import errorLogger from "../../helpers/errorLogger.helper.ts";
 async function createProjectProvider(req: Request, res: Response)
 {
   const validatedResult = matchedData(req);
-  // ! Replace User ID with authenticated user
-    const project = new Project({
-      user: "00000020f51bb4362eee2a4d",
-      ...validatedResult
-    });
 
   try {
+    const project = new Project(validatedResult);
     await project.save();
-    return res.status(StatusCodes.CREATED).json({ item: "The project created" });
+    return res.status(StatusCodes.CREATED).json(project);
   }
   catch (error) {
     if (error instanceof Error) errorLogger(`Error creating a new project: ${error.message}`, req, error);

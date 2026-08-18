@@ -1,6 +1,7 @@
 POST http://localhost:3001/projects
 Content-Type: application/json
 {
+  "user": "6a8449d036d931f4518b3632",
   "title": "New Title",
   "description": "description",
   "developmentAreas": ["UI", "UX", "API"],
