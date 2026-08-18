@@ -15,7 +15,7 @@ async function createProjectProvider(req: Request, res: Response)
 
   try {
     await project.save();
-    return res.status(StatusCodes.OK).json({ item: "The project created" });
+    return res.status(StatusCodes.CREATED).json({ item: "The project created" });
   }
   catch (error) {
     if (error instanceof Error) errorLogger(`Error creating a new project: ${error.message}`, req, error);

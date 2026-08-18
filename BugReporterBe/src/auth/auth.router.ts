@@ -6,7 +6,7 @@ import { handleGetLogin, handleGetSignup } from "./auth.controller.ts";
 const authRouter = express.Router();
 
 authRouter.post("/login", (req: Request, res: Response) => {
-  console.log("HELLO");
+  console.log("LOGIN");
   if(req) {
     return handleGetLogin(req, res);
   } else {
@@ -15,7 +15,7 @@ authRouter.post("/login", (req: Request, res: Response) => {
 });
 
 authRouter.post("/signup", (req: Request, res: Response) => {
-  console.log("HELLO");
+  console.log("SIGNUP");
   if(req) {
     return handleGetSignup(req, res);
   } else {
