@@ -5,7 +5,7 @@ import hasValidField from "../../helpers/hasValidField.helper";
 
 const createBugValidator: ValidationChain[] = [
   param("projectId", "A bug must be linked to a valid ProjectID").notEmpty().isMongoId(),
-  param("projectId").if((_value, meta: Meta) => { hasValidField(meta, "projectId") }).custom(async (_value, meta: Meta) => 
+  param("projectId").if((_value, meta: Meta) => { return hasValidField(meta, "projectId") }).custom(async (_value, meta: Meta) => 
     {
       const req = meta.req as Request;
 
@@ -22,7 +22,7 @@ const createBugValidator: ValidationChain[] = [
   body("title", "The title must be less than 100 characters").isLength({ max: 100 }).trim(),
   body("developmentArea", "A bug must have a developmet area").notEmpty(),
   body("developmentArea", "The development area must be a string").isString().trim(),
-  body("developmentArea").if((_value, meta: Meta) => { hasValidField(meta, "projectId") }).custom(async (value: [string], meta: Meta) =>
+  body("developmentArea").if((_value, meta: Meta) => { return hasValidField(meta, "projectId") }).custom(async (value: string, meta: Meta) =>
     {
       const req = meta.req as Request;
 
@@ -42,7 +42,7 @@ const createBugValidator: ValidationChain[] = [
   body("stepsToReproduce.*", "The steps to reproduce must be strings with less than 100 characters").isString().isLength({ max: 100 }).trim(),
   body("environmentsUsed", "A bug must have an environement setup").notEmpty(),
   body("environmentsUsed.*", "The environemnts providedmust be strings").isString().trim(),
-  body("environmentsUsed").if((_value, meta: Meta) => { hasValidField(meta, "projectId") }).custom(async (value: [string], meta: Meta) => 
+  body("environmentsUsed").if((_value, meta: Meta) => { return hasValidField(meta, "projectId") }).custom(async (value: [string], meta: Meta) => 
     {
       const req = meta.req as Request;
 

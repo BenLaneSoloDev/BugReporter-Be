@@ -3,6 +3,9 @@ import { StatusCodes } from "http-status-codes";
 import express from "express";
 import { handleGetLogin, handleGetSignup } from "./auth.controller.ts";
 
+import { validationResult } from "express-validator";
+import createUserValidator from "./validators/createUser.validator.ts";
+
 const authRouter = express.Router();
 
 authRouter.post("/login", (req: Request, res: Response) => {
@@ -12,15 +15,19 @@ authRouter.post("/login", (req: Request, res: Response) => {
   } else {
     res.status(StatusCodes.BAD_REQUEST).json(StatusCodes.BAD_REQUEST);
   }    
+  
 });
 
-authRouter.post("/signup", (req: Request, res: Response) => {
-  console.log("SIGNUP");
-  if(req) {
+authRouter.post("/signup", createUserValidator, (req: Request, res: Response) => {
+  
+  const result = validationResult(req);
+
+  if(result.isEmpty()) {
     return handleGetSignup(req, res);
   } else {
-    res.status(StatusCodes.BAD_REQUEST).json(StatusCodes.BAD_REQUEST);
-  }    
+    res.status(StatusCodes.BAD_REQUEST).json(result.array());
+  }
+
 });
 
 export default authRouter;
