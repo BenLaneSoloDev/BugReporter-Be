@@ -3,17 +3,22 @@ import User from "../user.schema";
 import { StatusCodes } from "http-status-codes";
 import errorLogger from "../../helpers/errorLogger.helper";
 import { matchedData } from "express-validator";
+import bcrypt from "bcrypt";
 
 async function createUserProvider(req: Request, res: Response)
 {
   const validatedResult = matchedData(req);
-
+  
   try {
+
+    const salt = await bcrypt.genSalt();
+    const hashedPassword = await bcrypt.hash(validatedResult.password, salt);
+
     const user = new User({
       firstName: validatedResult.firstName,
       lastName: validatedResult.lastName,
       email: validatedResult.email,
-      password: validatedResult.password
+      password: hashedPassword
     });
     
     await user.save();
