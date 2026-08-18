@@ -10,6 +10,7 @@ import expressWinstonLogger from "../middleware/expressWinston.middleware.ts";
 import projectsRouter from "../projects/projects.router.ts";
 import bugsRouter from "../bugs/bugs.router.ts";
 import authRouter from "../auth/auth.router.ts";
+import responseFormatter from "../middleware/responseFormatter.middleware.ts";
 
 function configureApp(app: Express) : void
 {
@@ -22,6 +23,8 @@ function configureApp(app: Express) : void
 
   let accessLogStream = fs.createWriteStream(path.join(__dirname, "..", "access.log"), { flags: "a" });
   app.use(morgan("combined", { stream: accessLogStream }));
+
+  app.use(responseFormatter);
 
   app.use(expressWinstonLogger);
 
