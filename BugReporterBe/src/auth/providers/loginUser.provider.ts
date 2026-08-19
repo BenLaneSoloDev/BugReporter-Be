@@ -2,6 +2,8 @@ import type { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import errorLogger from "../../helpers/errorLogger.helper";
 import { matchedData } from "express-validator";
+import User from "../user.schema";
+import bcrypt from "bcrypt";
 
 async function loginUserProvider(req: Request, res: Response)
 {
@@ -9,7 +11,13 @@ async function loginUserProvider(req: Request, res: Response)
   
   try {
 
-    return res.status(StatusCodes.CREATED).json({});
+    const user = await User.findOne({ email: validatedResult.email });
+    if (!user) return res.status(StatusCodes.BAD_REQUEST).json({ message: "Please check your credentials" });
+
+    const result = await bcrypt.compare(validatedResult.password, user.password);
+    if (!result) return res.status(StatusCodes.BAD_REQUEST).json({ message: "Please check your credentials" });
+
+    return res.status(StatusCodes.CREATED).json({ login: true });
 
   }
   catch (error) {
