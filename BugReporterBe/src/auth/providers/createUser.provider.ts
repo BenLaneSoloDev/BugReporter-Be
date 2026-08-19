@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import User from "../user.schema";
+import { User } from "../user.schema";
 import { StatusCodes } from "http-status-codes";
 import errorLogger from "../../helpers/errorLogger.helper";
 import { matchedData } from "express-validator";
