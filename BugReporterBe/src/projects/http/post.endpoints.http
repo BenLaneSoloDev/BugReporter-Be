@@ -1,7 +1,8 @@
 POST http://localhost:3001/projects
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YTg0NWVjMjJjODM4ZmYxNTA1MDc4Y2QiLCJlbWFpbCI6Im5hdGxhbmVAZW1haWwuY29tIiwiaWF0IjoxNzg3MTUwMTgzLCJleHAiOjE3ODcyMzY1ODN9.fbWfgqeTDJ7H2kEd68UGGmHy305uwaGvW5BZwM-SC-4
 {
-  "user": "6a8449d036d931f4518b3632",
+  "user": "6a845ec22c838ff1505078cd",
   "title": "New Title",
   "description": "description",
   "developmentAreas": ["UI", "UX", "API"],

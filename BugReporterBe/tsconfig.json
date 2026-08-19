@@ -8,6 +8,7 @@
     "verbatimModuleSyntax": false,
     "noEmit": true,
     "strict": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "typeRoots": ["src/types/authRequest.type.ts"]
   }
 }

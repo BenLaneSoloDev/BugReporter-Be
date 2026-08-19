@@ -1,5 +1,7 @@
 import jwt from "jsonwebtoken";
 import { Types } from "mongoose";
+import { JWT_SECRET, JWT_ACCESS_EXPIRATION_TTL } from "../../settings/envConfig";
+import UserTokenPayload from "../../types/userTokenPayload.type";
 
 interface IUserToken {
   _id: Types.ObjectId,
@@ -8,16 +10,14 @@ interface IUserToken {
 
 function generateTokenProvider(user: IUserToken) {
 
-  const payload = {
+  const payload: UserTokenPayload = {
     sub: user["_id"].toString(),
     email: user.email,
     iat: Math.floor(Date.now() / 1000),
-    exp: Math.floor(Date.now() / 1000) + parseInt(process.env.JWT_ACCESS_EXPIRATION_TTL ?? "86400") // Defaults to 1 day
+    exp: Math.floor(Date.now() / 1000) + parseInt(JWT_ACCESS_EXPIRATION_TTL)
   };
     
-  const secret = process.env.JWT_SECRET;
-  console.log(secret);
-  return secret ? jwt.sign(payload, secret) : ""; // Returns no token if a secret is not setup
+  return jwt.sign(payload, JWT_SECRET); // Returns no token if a secret is not setup
 }
 
 export default generateTokenProvider;
