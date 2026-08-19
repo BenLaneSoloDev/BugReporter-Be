@@ -21,7 +21,7 @@ const createUserValidator = [
     return true;
 
   }),
-  body("password", "Password must be 8 characters long").isLength({ min: 8 }),
+  body("password", "Password must be 8 characters long").isLength({ min: 8 }).isString(),
   body("password", "Password must include at least one number, one uppercase letter, one lowercase letter and one special character`")
   .notEmpty()
   .matches(/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/)

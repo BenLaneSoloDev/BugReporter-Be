@@ -5,15 +5,18 @@ import { handleGetLogin, handleGetSignup } from "./auth.controller.ts";
 
 import { validationResult } from "express-validator";
 import createUserValidator from "./validators/createUser.validator.ts";
+import loginUserValidator from "./validators/loginUser.validator.ts";
 
 const authRouter = express.Router();
 
-authRouter.post("/login", (req: Request, res: Response) => {
-  console.log("LOGIN");
-  if(req) {
+authRouter.post("/login", loginUserValidator, (req: Request, res: Response) => {
+  
+  const result = validationResult(req);
+
+  if(result.isEmpty()) {
     return handleGetLogin(req, res);
   } else {
-    res.status(StatusCodes.BAD_REQUEST).json(StatusCodes.BAD_REQUEST);
+    res.status(StatusCodes.BAD_REQUEST).json(result.array());
   }    
   
 });
