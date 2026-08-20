@@ -12,7 +12,6 @@ async function createBugProvider(req: Request, res: Response)
   try {
 
     const projectId = validatedResult.projectId;
-    if (!projectId) throw new Error("No project assigned to bug");
 
     const project = await Project.findOne({ _id: projectId, user: req.user?.sub }); // Only add bug to this project if its own user submits this request
     if (!project) return res.status(StatusCodes.NOT_FOUND).json({ reason: "No Project found for the provided ID" });

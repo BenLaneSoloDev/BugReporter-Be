@@ -1,2 +1,3 @@
-DELETE http://localhost:3001/bugs/6a830231b8a7f7ac56ed9a23
+DELETE http://localhost:3001/bugs/6a86dfee2077c2eb8085ece5
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YTg0NWU5YTJjODM4ZmYxNTA1MDc4Y2IiLCJlbWFpbCI6ImJlbmxhbmVAZW1haWwuY29tIiwiaWF0IjoxNzg3MjIzNjMyLCJleHAiOjE3ODczMTAwMzJ9.E2zJ8XuhRBu9ahhltAkGmlOUlgFkcdfGpGUtsY6fqoU
