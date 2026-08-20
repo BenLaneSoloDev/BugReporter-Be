@@ -3,6 +3,7 @@ import { StatusCodes, ReasonPhrases } from "http-status-codes";
 import Bug from "../bugs.schema.ts";
 import errorLogger from "../../helpers/errorLogger.helper.ts";
 import { matchedData } from "express-validator";
+import Project from "../../projects/projects.schema.ts";
 
 async function createBugProvider(req: Request, res: Response)
 {
@@ -12,6 +13,9 @@ async function createBugProvider(req: Request, res: Response)
 
     const projectId = validatedResult.projectId;
     if (!projectId) throw new Error("No project assigned to bug");
+
+    const project = await Project.findOne({ _id: projectId, user: req.user?.sub }); // Only add bug to this project if its own user submits this request
+    if (!project) return res.status(StatusCodes.NOT_FOUND).json({ reason: "No Project found for the provided ID" });
 
     const bug = new Bug({
       project: projectId,
