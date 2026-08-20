@@ -7,9 +7,12 @@ import errorLogger from "../../helpers/errorLogger.helper.ts";
 async function createProjectProvider(req: Request, res: Response)
 {
   const validatedResult = matchedData(req);
+  const project = new Project({ 
+      user: req.user?.sub, // User will always exist due to the middleware authentication
+      ...validatedResult
+    });
 
   try {
-    const project = new Project(validatedResult);
     await project.save();
     return res.status(StatusCodes.CREATED).json(project);
   }

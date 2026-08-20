@@ -10,3 +10,4 @@ Bug Report Wizard backend server repository.
 - ? Express Validator
 - ? Winston
 - ? Bcrypt
+- ? JWT
