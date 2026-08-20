@@ -12,8 +12,10 @@ async function getProjectsProvider(req: Request, res: Response)
     const total = await Project.countDocuments({ user: req.user?.sub });
     const limit: number = typeof(validatedResult.limit) === "string" ? parseInt(validatedResult.limit, 10) : 5; 
     const page: number = typeof(validatedResult.page) === "string" ? parseInt(validatedResult.page, 10) : 1;
+    const totalPages = total === 0 ? 1 : Math.ceil(total/limit);
+
     const baseURL = `${req.protocol}://${req.get("host")}${req.originalUrl.split("?")[0]}`;
-    
+
     const projects = await Project.find({ user: req.user?.sub }).limit(limit).skip((page-1) * limit).sort({ title: 1 }); // Grabs all projects in alphabetical order
 
     const returnData = {
@@ -24,13 +26,13 @@ async function getProjectsProvider(req: Request, res: Response)
             projectsPerPage: limit,
             totalProjects: total,
             currentPage: page,
-            totalPages: Math.ceil(total/limit),
+            totalPages: totalPages,
           },
           links: {
             first: `${baseURL}?limit=${limit}&page=${1}`,
-            last: `${baseURL}?limit=${limit}&page=${Math.ceil(total/limit)}`,
+            last: `${baseURL}?limit=${limit}&page=${totalPages}`,
             current: `${baseURL}?limit=${limit}&page=${page}`,
-            next: page === Math.ceil(total/limit) ? `` : `${baseURL}?limit=${limit}&page=${page + 1}`,
+            next: page === totalPages ? `` : `${baseURL}?limit=${limit}&page=${page + 1}`,
             previous: page === 1 ? `` :  `${baseURL}?limit=${limit}&page=${page - 1}`
           }
         }
