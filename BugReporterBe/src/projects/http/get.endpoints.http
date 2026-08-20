@@ -1,2 +1,3 @@
 GET http://localhost:3001/projects?limit=3&page=1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YTg0NWVjMjJjODM4ZmYxNTA1MDc4Y2QiLCJlbWFpbCI6Im5hdGxhbmVAZW1haWwuY29tIiwiaWF0IjoxNzg3MTUwMTgzLCJleHAiOjE3ODcyMzY1ODN9.fbWfgqeTDJ7H2kEd68UGGmHy305uwaGvW5BZwM-SC-4
