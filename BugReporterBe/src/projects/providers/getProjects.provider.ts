@@ -9,13 +9,12 @@ async function getProjectsProvider(req: Request, res: Response)
   const validatedResult = matchedData(req);
 
   try {
-
-    const total = await Project.countDocuments();
+    const total = await Project.countDocuments({ user: req.user?.sub });
     const limit: number = typeof(validatedResult.limit) === "string" ? parseInt(validatedResult.limit, 10) : 5; 
     const page: number = typeof(validatedResult.page) === "string" ? parseInt(validatedResult.page, 10) : 1;
     const baseURL = `${req.protocol}://${req.get("host")}${req.originalUrl.split("?")[0]}`;
-
-    const projects = await Project.find().limit(limit).skip(page-1).sort({ title: 1 }); // Grabs all projects in alphabetical order
+    
+    const projects = await Project.find({ user: req.user?.sub }).limit(limit).skip((page-1) * limit).sort({ title: 1 }); // Grabs all projects in alphabetical order
 
     const returnData = {
       data: projects,
