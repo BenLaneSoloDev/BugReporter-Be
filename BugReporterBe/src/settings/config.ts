@@ -5,13 +5,14 @@ import path from "path";           // Node.js API
 import morgan from "morgan";
 import cors from "cors";
 import { StatusCodes } from "http-status-codes";
-
+import responseFormatter from "../middleware/responseFormatter.middleware.ts";
 import expressWinstonLogger from "../middleware/expressWinston.middleware.ts";
 
 import projectsRouter from "../projects/projects.router.ts";
 import bugsRouter from "../bugs/bugs.router.ts";
 import authRouter from "../auth/auth.router.ts";
-import responseFormatter from "../middleware/responseFormatter.middleware.ts";
+import { serve, setup } from "swagger-ui-express";
+import swaggerSpec from "../swagger.ts";
 
 function configureApp(app: Express) : void
 {
@@ -34,7 +35,7 @@ function configureApp(app: Express) : void
   app.use("/auth", authRouter);
   app.use("/projects", projectsRouter);
 
-  // TODO: ADDED API DOC ROUTE
+  app.use("/api-docs", serve, setup(swaggerSpec));
 
   app.use((req, res) => {
     res.status(StatusCodes.NOT_FOUND).json(null);

@@ -28,4 +28,47 @@ const projectSchema = new Schema({
 }, { timestamps: true, versionKey: false });
 
 const Project = model("Project", projectSchema);
-export default Project;
+export default Project;          
+
+/**
+ * @openapi
+ * components:
+ *  schemas:
+ *    Project:
+ *      type: object
+ *      required:
+ *        - user
+ *        - title
+ *        - developmentAreas
+ *        - environments
+ *      properties:
+ *        user:
+ *          type: string
+ *          description: UserID associated with the project
+ *        title:
+ *          type: string
+ *          description: Title of the project
+ *          maxLength: 100
+ *        description:
+ *          type: string
+ *          description: Description of the project
+ *          maxLength: 500
+ *        developmentAreas:
+ *          type: array
+ *          description: The different development areas within the project
+ *          minItems: 1
+ *          items:
+ *            type: string
+ *        environments:
+ *          type: array
+ *          description: The different environments used within the project
+ *          minItems: 1
+ *          items:
+ *            type: string
+ *      example: 
+ *        user: 6a845eb02c838ff1505078cc
+ *        title: Fighting Game
+ *        description: Mini arcade duelling button masher
+ *        developmentAreas: [UI, Combat, Environment]
+ *        environments: [Windows, Mac]    
+ */

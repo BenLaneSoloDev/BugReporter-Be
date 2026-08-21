@@ -11,3 +11,4 @@ Bug Report Wizard backend server repository.
 - ? Winston
 - ? Bcrypt
 - ? JWT
+- ? Swagger
