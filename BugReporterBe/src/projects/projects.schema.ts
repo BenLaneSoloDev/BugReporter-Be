@@ -70,5 +70,5 @@ export default Project;
  *        title: Fighting Game
  *        description: Mini arcade duelling button masher
  *        developmentAreas: [UI, Combat, Environment]
- *        environments: [Windows, Mac]    
+ *        environments: [Windows, Mac, Linux]    
  */

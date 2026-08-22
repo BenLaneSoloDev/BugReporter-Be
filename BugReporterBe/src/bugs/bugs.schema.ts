@@ -84,3 +84,64 @@ const bugSchema = new Schema({
 
 const Bug = model("Bug", bugSchema);
 export default Bug;
+
+/**
+ * @openapi
+ * components:
+ *  schemas:
+ *    Bug:
+ *      type: object
+ *      required:
+ *        - project
+ *        - title
+ *        - developmentArea
+ *        - severity
+ *        - stepsToReproduce
+ *        - environmentsUsed
+ *        - expectedResult
+ *        - actualResult
+ *      properties:
+ *        project:
+ *          type: string
+ *          description: First name of the user
+ *          maxLength: 100
+ *        title:
+ *          type: string
+ *          description: Last name of the user
+ *          maxLength: 100
+ *        developmentArea:
+ *          type: string
+ *          description: "A valid development area of the project that this bug linked to (I.E. Project Schema: developmentAreas)"
+ *          example: ["UI"]
+ *        severity:
+ *          type: string
+ *          description: The importance of getting this bug fixed
+ *          enum: ["low", "normal", "high", "extreme"]
+ *        stepsToReproduce:
+ *          type: array
+ *          description: The list of steps involved in having this bug occur
+ *          maxItems: 10
+ *          items:
+ *            type: string
+ *            maxLength: 100
+ *        environmentsUsed:
+ *          type: array
+ *          description: "Valid development environments that this bug occurs in for the linked project (I.E. Project Schema: environments)"
+ *          example: ["Windows", "Mac"]   
+ *          minItems: 1
+ *          items:
+ *            type: string
+ *        expectedResult:
+ *          type: string
+ *          description: What should be happening with this part of the project
+ *          maxLength: 250  
+ *        actualResult:
+ *          type: string
+ *          description: What is actually happening with this part of the project (the bug)
+ *          maxLength: 250        
+ *      example: 
+ *        firstName: John
+ *        lastName: Smith
+ *        email: JohnSmith@gmail.com
+ *        password: Password123?
+ */
