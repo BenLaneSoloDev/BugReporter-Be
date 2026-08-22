@@ -44,3 +44,35 @@ export {
   IUser,
   User
 };
+
+/**
+ * @openapi
+ * components:
+ *  schemas:
+ *    User:
+ *      type: object
+ *      required:
+ *        - firstName
+ *        - email
+ *        - password
+ *      properties:
+ *        firstName:
+ *          type: string
+ *          description: First name of the user
+ *          maxLength: 100
+ *        lastName:
+ *          type: string
+ *          description: Last name of the user
+ *          maxLength: 100
+ *        email:
+ *          type: string
+ *          description: Valid email address of the user
+ *        password:
+ *          type: string
+ *          description: User password that must contain 8 characters, a number, a capital letter and a special character
+ *      example: 
+ *        firstName: John
+ *        lastName: Smith
+ *        email: JohnSmith@gmail.com
+ *        password: Password123?
+ */
