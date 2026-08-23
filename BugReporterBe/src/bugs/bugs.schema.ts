@@ -111,8 +111,8 @@ export default Bug;
  *          maxLength: 100
  *        developmentArea:
  *          type: string
- *          description: "A valid development area of the project that this bug linked to (I.E. Project Schema: developmentAreas)"
- *          example: ["UI"]
+ *          description: "A valid development area of the project that this bug is linked to (Uses a Project Schema 'developmentAreas' for valid values)"
+ *          example: "UI"
  *        severity:
  *          type: string
  *          description: The importance of getting this bug fixed
@@ -126,7 +126,7 @@ export default Bug;
  *            maxLength: 100
  *        environmentsUsed:
  *          type: array
- *          description: "Valid development environments that this bug occurs in for the linked project (I.E. Project Schema: environments)"
+ *          description: "Valid development environments that this bug occurs in for the linked project (Uses a Project Schema 'environments' for valid values)"
  *          example: ["Windows", "Mac"]   
  *          minItems: 1
  *          items:
@@ -140,8 +140,12 @@ export default Bug;
  *          description: What is actually happening with this part of the project (the bug)
  *          maxLength: 250        
  *      example: 
- *        firstName: John
- *        lastName: Smith
- *        email: JohnSmith@gmail.com
- *        password: Password123?
- */
+ *        project: 6a86df762077c2eb8085ece0
+ *        title: Bug Submission
+ *        developmentArea: UI
+ *        severity: extreme
+ *        stepsToReproduce: ["Submit the bug wizard on the final page"]
+ *        environmentsUsed: ["Windows"]
+ *        expectedResult: Return to home page with data sent to the server
+ *        actualResult: Page is stuck in the wizard, and no data is sent to the server    
+ */   

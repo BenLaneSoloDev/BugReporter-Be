@@ -67,8 +67,8 @@ export default Project;
  *            type: string
  *      example: 
  *        user: 6a845eb02c838ff1505078cc
- *        title: Fighting Game
- *        description: Mini arcade duelling button masher
- *        developmentAreas: [UI, Combat, Environment]
- *        environments: [Windows, Mac, Linux]    
+ *        title: Bug Report Wizard
+ *        description: A bug reporting wizard website that allows you to track bugs found within different projects
+ *        developmentAreas: [UI, API, Routing, Database]
+ *        environments: [Windows, Mac]    
  */
