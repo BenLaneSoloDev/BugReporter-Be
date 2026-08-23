@@ -24,6 +24,89 @@ projectsRouter.get("/", [...getProjectValidator, authenticateToken], (req: Reque
 
 });
 
+/**
+ * @openapi
+ * 
+ * components:
+ *  securitySchemes:
+ *    bearerAuth:
+ *      type: http
+ *      scheme: bearer
+ *      bearerFormat: JWT
+ * 
+ * /projects:
+ *  post:
+ *    summary: Create a new project
+ *    tags: [Projects]
+ *    security: 
+ *      - bearerAuth: []
+ *    requestBody: 
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/Project'
+ *    responses:
+ *      201:
+ *        description: Project created successfully
+ *        content: 
+ *          application/json:
+ *            example:
+ *              status: success
+ *              statusCode: 201
+ *              message: Created
+ *              data:
+ *                _id: 6a86df762077c2eb8085ece0
+ *                title: Bug Report Wizard
+ *                description: A bug reporting wizard website that allows you to track bugs found within different projects
+ *                developmentAreas: [UI, API, Routing, Database]
+ *                environments: [Windows, Mac]    
+ *      400:
+ *        description: Bad Request error
+ *        content: 
+ *          application/json:
+ *            example:
+ *              status: error
+ *              statusCode: 400
+ *              message: Bad Request
+ *              error:
+ *                type: field
+ *                value: "UI"
+ *                msg: Development areas must be an array and have at least one entry
+ *                path: developmentAreas
+ *                location: body
+ *      401:
+ *        description: Not authorized error
+ *        content: 
+ *          application/json:
+ *            example:
+ *              status: error
+ *              statusCode: 401
+ *              message: Unauthorized
+ *              error:
+ *                message: You are not authorized to perform this request
+ *      403:
+ *        description: Forbidden Error
+ *        content: 
+ *          application/json:
+ *            example:
+ *              status: error
+ *              statusCode: 403
+ *              message: Forbidden
+ *              error:
+ *                message: Please login again, invalid token
+ *      504:
+ *        description: Gateway Timeout Error
+ *        content: 
+ *          application/json:
+ *            example:
+ *              status: error
+ *              statusCode: 504
+ *              message: Gateway Timeout
+ *              error:
+ *                reason: Unable to process your request at this moment, please try later
+ */
+
 projectsRouter.post("/", [...createProjectValidator, authenticateToken], (req: Request, res: Response) => {
 
   const result = validationResult(req);

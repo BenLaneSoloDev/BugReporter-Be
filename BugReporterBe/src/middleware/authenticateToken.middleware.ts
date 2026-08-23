@@ -8,7 +8,7 @@ const authenticateToken = (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
 
-  if (!token) return res.status(StatusCodes.UNAUTHORIZED).json({ message: "You are not authorized to perform this request "});
+  if (!token) return res.status(StatusCodes.UNAUTHORIZED).json({ message: "You are not authorized to perform this request"});
   
   jwt.verify(token, JWT_SECRET, (err, user) => {
     if(err) {

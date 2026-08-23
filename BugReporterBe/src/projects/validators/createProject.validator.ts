@@ -9,9 +9,9 @@ const createProjectValidator = [
   body("description").optional(),
   body("description", "The description must be a string").isString(),
   body("description", "The description must be less than 500 characters").isLength({ max: 500 }).trim(),
-  body("developmentAreas", "Development areas must be set").isArray({ min: 1 }),
+  body("developmentAreas", "Development areas must be an array and have at least one entry").isArray({ min: 1 }),
   body("developmentAreas.*", "Development areas must be strings").isString().trim(),
-  body("environments", "An environment must be set").isArray({ min: 1}),
+  body("environments", "Environments must be an array and have at least one entry").isArray({ min: 1}),
   body("environments.*", "Environments must be strings").isString().trim(),
 ]
 

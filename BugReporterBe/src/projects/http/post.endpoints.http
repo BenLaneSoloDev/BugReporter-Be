@@ -1,6 +1,6 @@
 POST http://localhost:3001/projects
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YTg0NWU5YTJjODM4ZmYxNTA1MDc4Y2IiLCJlbWFpbCI6ImJlbmxhbmVAZW1haWwuY29tIiwiaWF0IjoxNzg3MjIzNjMyLCJleHAiOjE3ODczMTAwMzJ9.E2zJ8XuhRBu9ahhltAkGmlOUlgFkcdfGpGUtsY6fqoU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YTg0NWVjMjJjODM4ZmYxNTA1MDc4Y2QiLCJlbWFpbCI6Im5hdGxhbmVAZW1haWwuY29tIiwiaWF0IjoxNzg3NDgwOTA2LCJleHAiOjE3ODc1NjczMDZ9.h96Ur_qI8ejttqdtIfwZ9kwakUP-D_CSOaOIyxKocxg
 {
   "title": "New Title",
   "description": "description",

@@ -37,14 +37,10 @@ export default Project;
  *    Project:
  *      type: object
  *      required:
- *        - user
  *        - title
  *        - developmentAreas
  *        - environments
  *      properties:
- *        user:
- *          type: string
- *          description: UserID associated with the project
  *        title:
  *          type: string
  *          description: Title of the project
@@ -65,8 +61,7 @@ export default Project;
  *          minItems: 1
  *          items:
  *            type: string
- *      example: 
- *        user: 6a845eb02c838ff1505078cc
+ *      example:
  *        title: Bug Report Wizard
  *        description: A bug reporting wizard website that allows you to track bugs found within different projects
  *        developmentAreas: [UI, API, Routing, Database]
