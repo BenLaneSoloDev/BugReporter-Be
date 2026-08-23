@@ -21,20 +21,18 @@ async function getProjectsProvider(req: Request, res: Response)
     const returnData = {
       data: projects,
       pagination: {
-        pagination: {
-          meta: {
-            projectsPerPage: limit,
-            totalProjects: total,
-            currentPage: page,
-            totalPages: totalPages,
-          },
-          links: {
-            first: `${baseURL}?limit=${limit}&page=${1}`,
-            last: `${baseURL}?limit=${limit}&page=${totalPages}`,
-            current: `${baseURL}?limit=${limit}&page=${page}`,
-            next: page === totalPages ? `` : `${baseURL}?limit=${limit}&page=${page + 1}`,
-            previous: page === 1 ? `` :  `${baseURL}?limit=${limit}&page=${page - 1}`
-          }
+        meta: {
+          projectsPerPage: limit,
+          totalProjects: total,
+          currentPage: page,
+          totalPages: totalPages,
+        },
+        links: {
+          first: `${baseURL}?limit=${limit}&page=${1}`,
+          last: `${baseURL}?limit=${limit}&page=${totalPages}`,
+          current: `${baseURL}?limit=${limit}&page=${page}`,
+          next: page === totalPages ? `` : `${baseURL}?limit=${limit}&page=${page + 1}`,
+          previous: page === 1 ? `` :  `${baseURL}?limit=${limit}&page=${page - 1}`
         }
       }
     }
