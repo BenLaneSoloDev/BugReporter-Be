@@ -10,12 +10,8 @@ async function deleteProjectProvider(req: Request, res: Response)
   const validatedResult = matchedData(req); 
   const id = validatedResult.projectId;
 
-  try {
-    const project = await Project.findOne({ _id: id, user: req.user?.sub });
-    if (!project) return res.status(StatusCodes.NOT_FOUND).json({ reason: "No Project found for the provided ID" });
-    
+  try {    
     await Bug.deleteMany({ project: id });
-
     const deletedProject = await Project.deleteOne({ _id: id });
     return res.status(StatusCodes.OK).json(deletedProject);
   }

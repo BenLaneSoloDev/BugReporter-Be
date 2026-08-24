@@ -223,6 +223,85 @@ projectsRouter.post("/", [...createProjectValidator, authenticateToken], (req: R
   
 });
 
+/**
+ * @openapi
+ * 
+ * components:
+ *  securitySchemes:
+ *    bearerAuth:
+ *      type: http
+ *      scheme: bearer
+ *      bearerFormat: JWT
+ * 
+ * /projects/{projectId}:
+ *  delete:
+ *    summary: Delete a project
+ *    tags: [Projects]
+ *    security: 
+ *      - bearerAuth: []
+ *    parameters:
+ *      - in: path
+ *        name: projectId
+ *        required: true
+ *        description: The ID of the project being deleted
+ *    responses:
+ *      200:
+ *        description: Project deleted successfully
+ *        content: 
+ *          application/json:
+ *            example:
+ *              status: success
+ *              statusCode: 200
+ *              message: Ok
+ *              data:
+ *                acknowledged: true
+ *                deletedCount: 1
+ *      400:
+ *        description: Bad Request error
+ *        content: 
+ *          application/json:
+ *            example:
+ *              status: error
+ *              statusCode: 400
+ *              message: Bad Request
+ *              error:
+ *                type: field
+ *                value: "6a8c0a9a8f3f6cc3c6dfb580"
+ *                msg: No Project exists for the provided ProjectID
+ *                path: projectId
+ *                location: params
+ *      401:
+ *        description: Not authorized error
+ *        content: 
+ *          application/json:
+ *            example:
+ *              status: error
+ *              statusCode: 401
+ *              message: Unauthorized
+ *              error:
+ *                message: You are not authorized to perform this request
+ *      403:
+ *        description: Forbidden Error
+ *        content: 
+ *          application/json:
+ *            example:
+ *              status: error
+ *              statusCode: 403
+ *              message: Forbidden
+ *              error:
+ *                message: Please login again, invalid token
+ *      504:
+ *        description: Gateway Timeout Error
+ *        content: 
+ *          application/json:
+ *            example:
+ *              status: error
+ *              statusCode: 504
+ *              message: Gateway Timeout
+ *              error:
+ *                reason: Unable to process your request at this moment, please try later
+ */
+
 projectsRouter.delete("/:projectId", [...deleteProjectValidator, authenticateToken], (req: Request, res: Response) => {
   
   const result = validationResult(req);
