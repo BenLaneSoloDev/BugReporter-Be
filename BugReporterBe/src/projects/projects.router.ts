@@ -79,11 +79,11 @@ const projectsRouter = express.Router();
  *              statusCode: 400
  *              message: Bad Request
  *              error:
- *                type: field
- *                value: "e"
- *                msg: Page must be a valid integer
- *                path: page
- *                location: query
+ *                - type: field
+ *                  value: "e"
+ *                  msg: Page must be a valid integer
+ *                  path: page
+ *                  location: query
  *      401:
  *        description: Not authorized error
  *        content: 
@@ -174,11 +174,11 @@ projectsRouter.get("/", [...getProjectValidator, authenticateToken], (req: Reque
  *              statusCode: 400
  *              message: Bad Request
  *              error:
- *                type: field
- *                value: "UI"
- *                msg: Development areas must be an array and have at least one entry
- *                path: developmentAreas
- *                location: body
+ *                - type: field
+ *                  value: "UI"
+ *                  msg: Development areas must be an array and have at least one entry
+ *                  path: developmentAreas
+ *                  location: body
  *      401:
  *        description: Not authorized error
  *        content: 
@@ -265,11 +265,11 @@ projectsRouter.post("/", [...createProjectValidator, authenticateToken], (req: R
  *              statusCode: 400
  *              message: Bad Request
  *              error:
- *                type: field
- *                value: "6a8c0a9a8f3f6cc3c6dfb580"
- *                msg: No Project exists for the provided ProjectID
- *                path: projectId
- *                location: params
+ *                - type: field
+ *                  value: "6a8c0a9a8f3f6cc3c6dfb580"
+ *                  msg: No Project exists for the provided ProjectID
+ *                  path: projectId
+ *                  location: params
  *      401:
  *        description: Not authorized error
  *        content: 

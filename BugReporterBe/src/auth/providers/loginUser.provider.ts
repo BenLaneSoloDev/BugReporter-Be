@@ -13,10 +13,10 @@ async function loginUserProvider(req: Request, res: Response)
   try {
 
     const user = await User.findOne({ email: validatedResult.email });
-    if (!user) return res.status(StatusCodes.BAD_REQUEST).json({ message: "Please check your credentials" });
+    if (!user) return res.status(StatusCodes.NOT_FOUND).json({ message: "Cannot find user, please check your credentials" });
 
     const result = await bcrypt.compare(validatedResult.password, user.password);
-    if (!result) return res.status(StatusCodes.BAD_REQUEST).json({ message: "Please check your credentials" });
+    if (!result) return res.status(StatusCodes.NOT_FOUND).json({ message: "Cannot find user, please check your credentials" });
 
     const { _id, email } = user;
     const token = generateTokenProvider({ _id, email });

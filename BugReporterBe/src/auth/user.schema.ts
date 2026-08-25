@@ -76,3 +76,24 @@ export {
  *        email: JohnSmith@gmail.com
  *        password: Password123?
  */
+
+/**
+ * @openapi
+ * components:
+ *  schemas:
+ *    UserLogin:
+ *      type: object
+ *      required:
+ *        - email
+ *        - password
+ *      properties:
+ *        email:
+ *          type: string
+ *          description: Valid email address of the user
+ *        password:
+ *          type: string
+ *          description: User password that must contain 8 characters, a number, a capital letter and a special character
+ *      example:
+ *        email: JohnSmith@gmail.com
+ *        password: Password123?
+ */
