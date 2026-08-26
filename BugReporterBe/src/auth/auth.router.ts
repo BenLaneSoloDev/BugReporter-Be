@@ -45,31 +45,11 @@ const authRouter = express.Router();
  *              statusCode: 400
  *              message: Bad Request
  *              error:
- *                message: Cannot find user, please check your credentials
- *      401:
- *        description: Not authorized error
- *        content: 
- *          application/json:
- *            example:
- *              status: error
- *              statusCode: 401
- *              message: Unauthorized
- *              error:
- *                - type: field
- *                  value: JohnSmithgmail.com
- *                  msg: Email is required, and must be a valid email
- *                  path: email
- *                  location: body
- *      403:
- *        description: Forbidden Error
- *        content: 
- *          application/json:
- *            example:
- *              status: error
- *              statusCode: 403
- *              message: Forbidden
- *              error:
- *                message: Please login again, invalid token
+ *                type: field
+ *                value: Passwor
+ *                msg: Password must be 8 characters long
+ *                path: password
+ *                location: body
  *      404:
  *        description: Not Found Error
  *        content: 
@@ -103,6 +83,61 @@ authRouter.post("/login", loginUserValidator, (req: Request, res: Response) => {
   }    
   
 });
+
+/**
+ * @openapi
+ * 
+ * /auth/signup:
+ *  post:
+ *    summary: Signup (create) a user
+ *    tags: [Users]
+ *    requestBody: 
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/User'
+ *    responses:
+ *      201:
+ *        description: User login successful
+ *        content: 
+ *          application/json:
+ *            example:
+ *              status: success
+ *              statusCode: 201
+ *              message: Created
+ *              data:
+ *                firstName: John
+ *                lastName: Smith
+ *                email: JohnSmith@gmail.com
+ *                _id: 6a8dc6e90a93c7fe8ec6702c
+ *                createdAt: 2026-08-25T16:46:33.116Z
+ *                updatedAt: 2026-08-25T16:46:33.116Z
+ *      400:
+ *        description: Bad Request error
+ *        content: 
+ *          application/json:
+ *            example:
+ *              status: error
+ *              statusCode: 400
+ *              message: Bad Request
+ *              error:
+ *                type: field
+ *                value: JohnSmith@gmail.com
+ *                msg: A user already exists for this email
+ *                path: email
+ *                location: body
+ *      504:
+ *        description: Gateway Timeout Error
+ *        content: 
+ *          application/json:
+ *            example:
+ *              status: error
+ *              statusCode: 504
+ *              message: Gateway Timeout
+ *              error:
+ *                reason: Unable to process your request at this moment, please try later
+ */
 
 authRouter.post("/signup", createUserValidator, (req: Request, res: Response) => {
   

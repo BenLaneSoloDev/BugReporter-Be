@@ -8,8 +8,8 @@ Content-Type: application/json
 POST http://localhost:3001/auth/signup/
 Content-Type: application/json
 {
-  "firstName": "Nat",
+  "firstName": "Harrison",
   "lastName": "Lane",
-  "email": "NatLane@email.com",
+  "email": "HarrisonLane@email.com",
   "password": "Password1!"
 }
