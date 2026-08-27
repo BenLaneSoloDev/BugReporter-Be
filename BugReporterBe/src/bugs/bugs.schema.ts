@@ -92,7 +92,6 @@ export default Bug;
  *    Bug:
  *      type: object
  *      required:
- *        - project
  *        - title
  *        - developmentArea
  *        - severity
@@ -101,10 +100,6 @@ export default Bug;
  *        - expectedResult
  *        - actualResult
  *      properties:
- *        project:
- *          type: string
- *          description: First name of the user
- *          maxLength: 100
  *        title:
  *          type: string
  *          description: Last name of the user
@@ -139,8 +134,7 @@ export default Bug;
  *          type: string
  *          description: What is actually happening with this part of the project (the bug)
  *          maxLength: 250        
- *      example: 
- *        project: 6a86df762077c2eb8085ece0
+ *      example:
  *        title: Bug Submission
  *        developmentArea: UI
  *        severity: extreme

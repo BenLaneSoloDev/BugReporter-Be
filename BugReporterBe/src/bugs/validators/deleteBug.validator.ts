@@ -3,6 +3,7 @@ import { param, ValidationChain, matchedData, type Meta, validationResult, type 
 import hasValidField from "../../helpers/hasValidField.helper";
 
 const deleteBugValidator: ValidationChain[] = [
+  param("projectId", "A ProjectID must not be provided").not().exists(),
   param("bugId", "A BugID must be provided to delete a bug").notEmpty().isMongoId(),
   param("bugId").if((_value, meta: Meta) => { return hasValidField(meta, "bugId") }).custom(async (_value, meta: Meta) => 
     {

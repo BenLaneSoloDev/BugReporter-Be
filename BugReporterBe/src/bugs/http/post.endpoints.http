@@ -1,6 +1,6 @@
-POST http://localhost:3001/projects/6a86df7d2077c2eb8085ece1/bugs
+POST http://localhost:3001/projects/6a86df762077c2eb8085ece0/bugs
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YTg0NWU5YTJjODM4ZmYxNTA1MDc4Y2IiLCJlbWFpbCI6ImJlbmxhbmVAZW1haWwuY29tIiwiaWF0IjoxNzg3MjIzNjMyLCJleHAiOjE3ODczMTAwMzJ9.E2zJ8XuhRBu9ahhltAkGmlOUlgFkcdfGpGUtsY6fqoU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YTg0NWVjMjJjODM4ZmYxNTA1MDc4Y2QiLCJlbWFpbCI6Im5hdGxhbmVAZW1haWwuY29tIiwiaWF0IjoxNzg3NzU1MzkwLCJleHAiOjE3ODc4NDE3OTB9.eA8y8VHOEGnamORu_Tz7HgCJM48SYptx9sgPkOR0UVo
 {
   "title": "title",
   "developmentArea": "UI",

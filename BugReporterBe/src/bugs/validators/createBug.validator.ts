@@ -40,7 +40,7 @@ const createBugValidator: ValidationChain[] = [
   body("severity", `The severity must be a valid option ("low", "normal", "high", "critical")`).isIn(["low", "normal", "high", "critical"]),
   body("stepsToReproduce", "A bug must have steps to reproduce, but no more than 10").isArray({ min: 1, max: 10 }),
   body("stepsToReproduce.*", "The steps to reproduce must be strings with less than 100 characters").isString().isLength({ max: 100 }).trim(),
-  body("environmentsUsed", "A bug must have an environement setup").notEmpty(),
+  body("environmentsUsed", "A bug must have an environement setup").isArray({ min: 1 }),
   body("environmentsUsed.*", "The environemnts providedmust be strings").isString().trim(),
   body("environmentsUsed").if((_value, meta: Meta) => { return hasValidField(meta, "projectId") }).custom(async (value: [string], meta: Meta) => 
     {
