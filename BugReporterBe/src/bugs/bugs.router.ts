@@ -139,6 +139,90 @@ bugsRouter.post("/", [...createBugValidator, authenticateToken], (req: Request, 
 
 });
 
+/**
+ * @openapi
+ * 
+ * components:
+ *  securitySchemes:
+ *    bearerAuth:
+ *      type: http
+ *      scheme: bearer
+ *      bearerFormat: JWT
+ * 
+ * /bugs/{bugId}:
+ *  delete:
+ *    summary: Delete an existing bug
+ *    tags: [Bugs]
+ *    security: 
+ *      - bearerAuth: []
+ *    responses:
+ *      200:
+ *        description: Bug deleted successfully
+ *        content: 
+ *          application/json:
+ *            example:
+ *              status: success
+ *              statusCode: 200
+ *              message: Ok
+ *              data:
+ *                acknowledged: true
+ *                deletedCount: 1
+ *      400:
+ *        description: Bad Request error
+ *        content: 
+ *          application/json:
+ *            example:
+ *              status: error
+ *              statusCode: 400
+ *              message: Bad Request
+ *              error:
+ *                - type: field
+ *                  value: 6a86df942077c2eb8085ece
+ *                  msg: A BugID must be provided to delete a bug
+ *                  path: bugId
+ *                  location: params
+ *      401:
+ *        description: Not authorized error
+ *        content: 
+ *          application/json:
+ *            example:
+ *              status: error
+ *              statusCode: 401
+ *              message: Unauthorized
+ *              error:
+ *                message: You are not authorized to perform this request
+ *      403:
+ *        description: Forbidden Error
+ *        content: 
+ *          application/json:
+ *            example:
+ *              status: error
+ *              statusCode: 403
+ *              message: Forbidden
+ *              error:
+ *                message: Please login again, invalid token
+ *      404:
+ *        description: Not Found Error
+ *        content: 
+ *          application/json:
+ *            example:
+ *              status: error
+ *              statusCode: 404
+ *              message: Not Found
+ *              error:
+ *                reason: No Bug found for the provided ID
+ *      504:
+ *        description: Gateway Timeout Error
+ *        content: 
+ *          application/json:
+ *            example:
+ *              status: error
+ *              statusCode: 504
+ *              message: Gateway Timeout
+ *              error:
+ *                reason: Unable to process your request at this moment, please try later
+ */
+
 bugsRouter.delete("/:bugId", [...deleteBugValidator, authenticateToken], (req: Request, res: Response) => {
 
   const result = validationResult(req);
