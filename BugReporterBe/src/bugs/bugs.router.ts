@@ -11,6 +11,127 @@ import deleteBugValidator from "./validators/deleteBug.validator.ts";
 
 const bugsRouter = express.Router({ mergeParams: true }); // Allows ProjectID to be read from parent
 
+/**
+ * @openapi
+ * 
+ * components:
+ *  securitySchemes:
+ *    bearerAuth:
+ *      scheme: bearer
+ *      bearerFormat: JWT
+ * 
+ * /projects/{projectId}/bugs:
+ *  get:
+ *    summary: Get all bugs
+ *    tags: [Bugs]
+ *    security: 
+ *      - bearerAuth: []
+ *    parameters:
+ *      - in: path
+ *        name: projectId
+ *        required: true
+ *        description: The ID of the project the bug is being created for
+ *      - in: query
+ *        name: limit
+ *        schema: 
+ *          type: integer
+ *          default: 5
+ *        description: The number of projects needed in a single response
+ *      - in: query
+ *        name: page
+ *        schema: 
+ *          type: integer
+ *          default: 1
+ *        description: The page number of the projects response 
+ *    responses:
+ *      200:
+ *        description: Bugs found successfully
+ *        content: 
+ *          application/json:
+ *            example:
+ *              status: success
+ *              statusCode: 200
+ *              message: OK
+ *              data:
+ *                - _id: 6a8efe9ef53f0ba573f745c9
+ *                  project: 6a86df762077c2eb8085ece0
+ *                  title: Bug Submission
+ *                  developmentArea: UI
+ *                  severity: extreme
+ *                  stepsToReproduce: ["Submit the bug wizard on the final page"]
+ *                  environmentsUsed: ["Windows"]
+ *                  expectedResult: Return to home page with data sent to the server
+ *                  actualResult: Page is stuck in the wizard, and no data is sent to the server
+ *                  createdAt: 2026-08-26T14:56:30.349Z
+ *                  updatedAt: 2026-08-26T14:56:30.349Z
+ *              pagination:
+ *                meta:
+ *                  bugsPerPage: 5 
+ *                  totalBugs: 7
+ *                  currentPage: 1
+ *                  totalPages: 2
+ *                links:
+ *                  first: http://localhost:3001/projects/6a86df762077c2eb8085ece0/bugs?limit=5&page=1
+ *                  last: http://localhost:3001/projects/6a86df762077c2eb8085ece0/bugs?limit=5&page=2
+ *                  current: http://localhost:3001/projects/6a86df762077c2eb8085ece0/bugs?limit=5&page=1
+ *                  next: http://localhost:3001/projects/6a86df762077c2eb8085ece0/bugs?limit=5&page=2
+ *                  previous: ""
+ *      400:
+ *        description: Bad Request error
+ *        content: 
+ *          application/json:
+ *            example:
+ *              status: error
+ *              statusCode: 400
+ *              message: Bad Request
+ *              error:
+ *                - type: field
+ *                  value: 6a86df762077c2eb8085ece
+ *                  msg: A valid ProjectID must be used
+ *                  path: projectId
+ *                  location: params
+ *      401:
+ *        description: Not authorized error
+ *        content: 
+ *          application/json:
+ *            example:
+ *              status: error
+ *              statusCode: 401
+ *              message: Unauthorized
+ *              error:
+ *                message: You are not authorized to perform this request
+ *      403:
+ *        description: Forbidden Error
+ *        content: 
+ *          application/json:
+ *            example:
+ *              status: error
+ *              statusCode: 403
+ *              message: Forbidden
+ *              error:
+ *                message: Please login again, invalid token
+ *      404:
+ *        description: Not Found Error
+ *        content: 
+ *          application/json:
+ *            example:
+ *              status: error
+ *              statusCode: 404
+ *              message: Not Found
+ *              error:
+ *                reason: No Project found for the provided ID
+ *      504:
+ *        description: Gateway Timeout Error
+ *        content: 
+ *          application/json:
+ *            example:
+ *              status: error
+ *              statusCode: 504
+ *              message: Gateway Timeout
+ *              error:
+ *                reason: Unable to process your request at this moment, please try later
+ */
+
 bugsRouter.get("/", [...getBugsValidator, authenticateToken], (req: Request, res: Response) => {
   
   const result = validationResult(req);
@@ -139,7 +260,7 @@ bugsRouter.post("/", [...createBugValidator, authenticateToken], (req: Request, 
 
 });
 
-/**
+/** 
  * @openapi
  * 
  * components:
@@ -155,6 +276,11 @@ bugsRouter.post("/", [...createBugValidator, authenticateToken], (req: Request, 
  *    tags: [Bugs]
  *    security: 
  *      - bearerAuth: []
+ *    parameters:
+ *      - in: path
+ *        name: bugId
+ *        required: true
+ *        description: The ID of the bug being deleted
  *    responses:
  *      200:
  *        description: Bug deleted successfully
