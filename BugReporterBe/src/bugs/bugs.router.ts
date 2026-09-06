@@ -17,6 +17,7 @@ const bugsRouter = express.Router({ mergeParams: true }); // Allows ProjectID to
  * components:
  *  securitySchemes:
  *    bearerAuth:
+ *      type: http
  *      scheme: bearer
  *      bearerFormat: JWT
  * 
