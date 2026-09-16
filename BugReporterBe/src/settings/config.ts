@@ -19,13 +19,20 @@ function configureApp(app: Express) : void
   // ? ADDED MIDDLEWARE
   app.use(express.json());
 
+  app.use((req, res, next) => {
+    console.log(`[DEBUG] Incoming Request: ${req.method} ${req.url}`);
+    console.log(`[DEBUG] Origin Header: ${req.headers.origin}`);
+    next();
+  });
+
   // TODO: CORS must be tested before release to ensure it works correctly
-  const corsOptions = { origin: ["http://localhost:3001/"] };
+  // TODO: MAKE SURE REAL URLS ARE ADDED TO ENV FILES FOR PRODUCTION
+  const corsOptions = { origin: ["http://localhost:3001", "http://localhost:5173"] };
   app.use(cors(corsOptions));
 
   let accessLogStream = fs.createWriteStream(path.join(__dirname, "..", "access.log"), { flags: "a" });
   app.use(morgan("combined", { stream: accessLogStream }));
-
+  
   app.use(responseFormatter);
 
   app.use(expressWinstonLogger);

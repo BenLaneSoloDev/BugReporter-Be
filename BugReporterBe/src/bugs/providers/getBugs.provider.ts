@@ -4,6 +4,7 @@ import Bug from "../bugs.schema.ts";
 import Project from "../../projects/projects.schema.ts";
 import errorLogger from "../../helpers/errorLogger.helper.ts";
 import { matchedData } from "express-validator";
+import mongoose from "mongoose";
 
 async function getBugsProvider(req: Request, res: Response)
 {
@@ -20,7 +21,14 @@ async function getBugsProvider(req: Request, res: Response)
     const totalPages = total === 0 ? 1 : Math.ceil(total/limit);
 
     const baseURL = `${req.protocol}://${req.get("host")}${req.originalUrl.split("?")[0]}`;
-    const Bugs = await Bug.find({ project: projectId }).limit(limit).skip((page-1) * limit).sort({ title: 1 }); // Arranges alphabetically by default
+    const Bugs = await Bug.aggregate([
+      { $match: { project: new mongoose.Types.ObjectId(projectId) } },
+      { $addFields: { severityOrder: { $indexOfArray: [["low", "normal", "high", "extreme"], "$severity"] } } },
+      { $limit: limit },
+      { $skip: (page-1) * limit },
+      { $sort: { severityOrder: -1, title: 1 } },
+      { $project: { severityOrder: 0 } }
+    ]);
 
     let finalResponse = {
       data: Bugs,
