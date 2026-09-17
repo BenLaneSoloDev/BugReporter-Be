@@ -24,9 +24,9 @@ async function getBugsProvider(req: Request, res: Response)
     const Bugs = await Bug.aggregate([
       { $match: { project: new mongoose.Types.ObjectId(projectId) } },
       { $addFields: { severityOrder: { $indexOfArray: [["low", "normal", "high", "extreme"], "$severity"] } } },
-      { $limit: limit },
-      { $skip: (page-1) * limit },
       { $sort: { severityOrder: -1, title: 1 } },
+      { $skip: (page-1) * limit },
+      { $limit: limit },
       { $project: { severityOrder: 0 } }
     ]);
 
