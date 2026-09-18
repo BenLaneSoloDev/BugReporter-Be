@@ -151,6 +151,55 @@ authRouter.post("/signup", createUserValidator, (req: Request, res: Response) =>
 
 });
 
+/**
+ * @openapi
+ * 
+ * components:
+ *  securitySchemes:
+ *    bearerAuth:
+ *      type: http
+ *      scheme: bearer
+ *      bearerFormat: JWT
+ * 
+ * /auth/logout:
+ *  post:
+ *    summary: Sign out a user
+ *    tags: [Users]
+ *    security: 
+ *      - bearerAuth: []
+ *    responses:
+ *      200:
+ *        description: User logout successful
+ *        content: 
+ *          application/json:
+ *            example:
+ *              status: success
+ *              statusCode: 200
+ *              message: OK
+ *              data:
+ *                message: "Signed Out"
+ *      401:
+ *        description: Not authorized error
+ *        content: 
+ *          application/json:
+ *            example:
+ *              status: error
+ *              statusCode: 401
+ *              message: Unauthorized
+ *              error:
+ *                message: Token has been revoked, please login again
+ *      504:
+ *        description: Gateway Timeout Error
+ *        content: 
+ *          application/json:
+ *            example:
+ *              status: error
+ *              statusCode: 504
+ *              message: Gateway Timeout
+ *              error:
+ *                reason: Unable to process your request at this moment, please try later
+ */
+
 authRouter.post("/logout", (req: Request, res: Response) => {
 
   const result = validationResult(req);
