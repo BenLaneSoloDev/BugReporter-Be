@@ -22,12 +22,12 @@ function configureApp(app: Express) : void
   app.use((req, res, next) => {
     console.log(`[DEBUG] Incoming Request: ${req.method} ${req.url}`);
     console.log(`[DEBUG] Origin Header: ${req.headers.origin}`);
-    next();
+    next(); 
   });
 
   // TODO: CORS must be tested before release to ensure it works correctly
   // TODO: MAKE SURE REAL URLS ARE ADDED TO ENV FILES FOR PRODUCTION
-  const corsOptions = { origin: ["http://localhost:3001", "http://localhost:5173", "http://localhost:4173"] };
+  const corsOptions = { origin: ["http://localhost:3001", "http://localhost:5173", "http://localhost:4173", "https://bug-reporter-six.vercel.app"] };
   app.use(cors(corsOptions));
 
   let accessLogStream = fs.createWriteStream(path.join(__dirname, "..", "access.log"), { flags: "a" });
