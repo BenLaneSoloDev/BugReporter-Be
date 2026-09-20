@@ -27,7 +27,7 @@ function configureApp(app: Express) : void
 
   // TODO: CORS must be tested before release to ensure it works correctly
   // TODO: MAKE SURE REAL URLS ARE ADDED TO ENV FILES FOR PRODUCTION
-  const corsOptions = { origin: ["http://localhost:3001", "http://localhost:5173"] };
+  const corsOptions = { origin: ["http://localhost:3001", "http://localhost:5173", "http://localhost:4173"] };
   app.use(cors(corsOptions));
 
   let accessLogStream = fs.createWriteStream(path.join(__dirname, "..", "access.log"), { flags: "a" });
