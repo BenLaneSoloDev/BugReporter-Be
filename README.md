@@ -2,6 +2,8 @@
 
 A secure RESTful backend API for a bug report wizard. It handles user authentication as well as user specific linked data storage. It is used to save and track details of bugs found on specific projects.
 
+📌 Note on Live Demo - The backend for this application is hosted on Render’s free tier, meaning the first request may take 30 to 50 seconds while the web service spins up. Subsequent requests will load normally. Thank you for your patience!
+
 [![Live Demo](https://img.shields.io/badge/Live_Demo-Here-brightgreen?style=for-the-badge)](link)
 [![Tech Stack](https://img.shields.io/badge/Stack-Node.js_|_Express_|_Typescript_|_MongoDB_|_Mongoose-blue?style=for-the-badge)](#tech-stack)
 
